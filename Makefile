@@ -1,11 +1,8 @@
-build:
-	pyinstaller --name=AgriFile manage.py
-
-cc:
-	python -m "PyInstaller AgriFile.spec -y"
+b:
+	python -m PyInstaller AgriFile.spec -y
 
 
-run:
+r:
 	 .\dist\AgriFile\AgriFile.exe runserver --noreload
 
 
