@@ -1,0 +1,1 @@
+pyinstaller --name=mysite manage.py

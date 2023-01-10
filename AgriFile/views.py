@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 
 class Login(LoginView):
-    template_name = "user/login.html"
+    template_name = "user/../user/login.html"
 
 
 def index(request):
