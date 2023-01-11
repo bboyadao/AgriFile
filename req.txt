@@ -1,0 +1,42 @@
+- Lịch báo cáo
+
+- Quản nơi nhận.
+    + tên ban
+
+- Quản lý Người Dùng.
+    1. login bằng std. (full name)
+    2. đổi mật khẩu.
+    3. reset mk. (admin)
+    4. danh sách báo cáo cua mình.
+    5. phòng ban
+
+- Quản lý Phòng ban:
+    1. danh sách thêm sửa xóa phòng ban.
+
+- Báo cáo:
+    0. name.
+    1. nội dung.
+    2. files.
+    3. người duyệt.
+    3. người ký.
+    4. Phòng ban. (tự nhập )
+    5. thời gian.
+    6. Nơi nhận.
+    7. Note. (admin)
+
+    - Chức năng nâng cao (Kết hợp)
+        + danh sách (lọc).
+            1. Phòng ban.
+
+        + Report
+            Theo tháng.
+            Theo Quý.
+            Theo Năm.
+            =>  bao nhiêu báo cáo , {name, phòng ban, nơi nhận, thời gian.}
+
+
+- Lên lịch báo cho tháng của các usẻrr trong phòng ban.
+    + Hiện thông báo nộp theo lịch gần nhất.
+    + Danh sách lịch báo cáo theo phòng.
+
+- Notif: Theo lịch.
