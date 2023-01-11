@@ -6,12 +6,13 @@
     {% block logo %}
         <a href="/" class="brand-link">
             <img src="{%static 'admin-lte/dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            {% block logo_text %}<span class="brand-text font-weight-light">AdminLTE 3 </span>{% endblock %}
+            {% block logo_text %}<span class="brand-text font-weight-light">AgriFile</span>{% endblock %}
         </a>
     {% endblock %}
     <!-- sidebar: style can be found in sidebar.less -->
     <div class="sidebar">
         <!-- Sidebar user panel -->
+{% comment %}
         {% block user_panel %}
         <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -24,49 +25,97 @@
       </div>
         {% endblock %}
 
+
         {% block form %}{% endblock %}
+{% endcomment %}
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         {% block nav_links_ul %}
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             {% block nav_links_outer %}
-            <li class="nav-header">{% block nav_heading %}MAIN NAVIGATION{% endblock %}</li>
+            <li class="nav-header">{% block nav_heading %}ADMIN ZONE{% endblock %}</li>
 
             {% block nav_links %}
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i> 
-                        <p>Example link</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i> 
-                            <p>Example link active</p>
-                        </a>
-                    </li>
                 <li class="nav-item has-tree-view ">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-object-group"></i> <p>Sub menu</p>
-                        <p><i class="right fas fa-angle-left"></i>
+                        <i class="nav-icon fas nav-icon fas fa-user"></i>
+                        <p>Quản lý người dùng</p>
+                        <p>
+                            <i class="right fas fa-angle-right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview menu-open">
-                            <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-circle"></i> link
-                                    </a>
-                                </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-user"></i> Another link
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i> Danh sách
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i> Tạo mới
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="nav-item has-tree-view ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas nav-icon fas fa-user"></i>
+                        <p>Cài đặt</p>
+                        <p>
+                            <i class="right fas fa-angle-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i>
+                                Phòng ban
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i> Địa chỉ đến
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i> Lịch báo cáo
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+            {% endblock nav_links %}
+            {% endblock nav_links_outer %}
+            </ul>
+
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-header">WORK ZONE</li>
+                <li class="nav-item has-tree-view ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas nav-icon fas fa-user"></i>
+                        <p>Báo cáo</p>
+                        <p>
+                            <i class="right fas fa-angle-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview menu-open">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i>
+                                Nộp báo cáo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i>
+                                Danh sách đã nộp.
                             </a>
                         </li>
                     </ul>
                 </li>
-            {% endblock nav_links %}
-            {% endblock nav_links_outer %}
             </ul>
             </nav>
         {% endblock nav_links_ul %}
