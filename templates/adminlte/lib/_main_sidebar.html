@@ -1,4 +1,5 @@
 {% load adminlte_helpers %}
+{% load helpers %}
 {%load static %}
 <!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -32,12 +33,53 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         {% block nav_links_ul %}
         <nav class="mt-2">
+        {% for zone in ZONES %}
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            {% block nav_links_outer %}
+            <li class="nav-header">{% block nav_heading %}{{ zone.name }}{% endblock %}</li>
+            {% block nav_links %}
+                {% for menu in zone.child %}
+                    <li class="nav-item has-tree-view {% if menu.open %}
+                    menu-open
+                    {% endif %} ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas nav-icon fas fa-user"></i>
+                        <p>{{ menu.name }} </p>
+                        <p>
+                            <i class="right fas fa-angle-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview ">
+
+                        {% for nav in menu.child %}
+                            <li class="nav-item">
+                                <a href="{% url nav.link %}"
+                                   class="nav-link
+                                    {% if current_view == nav.link %}
+                                        active
+                                    {% endif %}
+                                ">
+                                    <i class="{{ nav.icon }}"></i>
+                                    {{ nav.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </li>
+                {% endfor %}
+            {% endblock nav_links %}
+            {% endblock nav_links_outer %}
+            </ul>
+        {% endfor %}
+
+
+{% comment %}
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             {% block nav_links_outer %}
             <li class="nav-header">{% block nav_heading %}ADMIN ZONE{% endblock %}</li>
-
             {% block nav_links %}
-                <li class="nav-item has-tree-view ">
+                <li class="nav-item has-tree-view {% open_menu 'user_list' %}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas nav-icon fas fa-user"></i>
                         <p>Quản lý người dùng</p>
@@ -47,7 +89,10 @@
                     </a>
                     <ul class="nav nav-treeview menu-open">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a
+                                href="{% url 'user_list' %}"
+                                class="nav-link {% add_active "user_list" %}"
+                            >
                                 <i class="nav-icon fas fa-circle"></i> Danh sách
                             </a>
                         </li>
@@ -57,7 +102,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </li>
                 <li class="nav-item has-tree-view ">
                     <a href="#" class="nav-link">
@@ -117,6 +161,7 @@
                     </ul>
                 </li>
             </ul>
+{% endcomment %}
             </nav>
         {% endblock nav_links_ul %}
     </div>
