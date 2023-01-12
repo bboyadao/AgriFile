@@ -42,7 +42,9 @@
                     <li class="nav-item has-tree-view {% if menu.open %}
                     menu-open
                     {% endif %} ">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link {% if menu.open %}
+                    active
+                    {% endif %}">
                         <i class="nav-icon fas nav-icon fas fa-user"></i>
                         <p>{{ menu.name }} </p>
                         <p>
