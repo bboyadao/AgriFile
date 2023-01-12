@@ -20,7 +20,7 @@
 
     {% block extra_head %}{% endblock %}
 </head>
-<body class="hold-transition sidebar-mini {% block body_class %}{% block bodyclass %}layout-fixed {% endblock %}{% endblock %}">
+<body class="hold-transition sidebar-mini {% block body_class %}{% block bodyclass %}{% endblock %}{% endblock %}">
 
 {% block body %}
     <div class="wrapper">
@@ -60,7 +60,9 @@
                 {% endblock %}
 
                 {% block content_block_wrap %}
-                    {% block content %}{% endblock %}
+                    {% block content %}
+
+                    {% endblock %}
                 {% endblock %}
             </section>
             {% endblock %}
@@ -72,14 +74,11 @@
             {% include 'adminlte/lib/_main_footer.html' %}
         {% endblock %}
 
-
-
     </div>
 {% endblock body %}
 
 {% block javascript %}
 {% include 'adminlte/lib/_scripts.html' %}
-{% block js %}{% endblock %}
 {% endblock %}
 
 {% block extra_js %}{% endblock %}

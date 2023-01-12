@@ -2,4 +2,8 @@
 
 {% block content %}
 
+    {% for user in user_list %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+
 {% endblock %}

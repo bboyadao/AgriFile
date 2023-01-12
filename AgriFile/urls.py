@@ -10,7 +10,7 @@ def index(request):
 
 
 urlpatterns = [
-	path('', index),
+	path('', index, name="index"),
 	path('login/', Login.as_view()),
 	path('admin/', admin.site.urls),
 	path('user/', include("user.urls")),
