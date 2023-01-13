@@ -1,10 +1,17 @@
 {% extends 'adminlte/base.html' %}
-{% load crispy_forms_tags %}
+{% load static i18n crispy_forms_tags %}
 
 {% block content %}
-<div class="card card-info">
+<script src="{% url 'js-catlog' %}"></script>
+<script src="{% static '/admin/js/core.js' %}"></script>
+<link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+<link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+
+{{ form.media }}
+
+<div class="card card-success">
   <div class="card-header">
-    <h3 class="card-title">Sửa Phòng Ban</h3>
+    <h3 class="card-title">Sửa Lịch Báo Cáo</h3>
   </div>
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
@@ -24,9 +31,13 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-block bg-gradient-info float-right">Sửa</button>
+      <button type="submit" class="btn btn-block bg-gradient-info float-right">Tạo</button>
     </div>
     <!-- /.card-footer -->
   </form>
+
 </div>
+
+
+
 {% endblock %}

@@ -37,14 +37,7 @@
                 </div>
 
                 <div class="card-body table-responsive p-0">
-                    {% if phongban_list.count == 0 %}
-                        <div class="card bg-gradient-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Không có Kết quả: <b>{{ request.GET.q }}</b></h3>
-                            </div>
 
-                        </div>
-                    {% else %}
                         <table class="table table-head-fixed text-nowrap">
                             <thead>
                             <tr>
@@ -55,22 +48,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for lichbaoccao in lichbaoccao_list %}
+                            {% for lichbaocao in lichbaocao_list %}
                                 <tr>
 
-                                    <td>{{ lichbaoccao.pk }}</td>
-                                    <td>{{ lichbaoccao.name }}</td>
-                                    <td>{{ lichbaoccao.deadline }}</td>
+                                    <td>{{ lichbaocao.pk }}</td>
+                                    <td>{{ lichbaocao.name }}</td>
+                                    <td>{{ lichbaocao.deadline }}</td>
                                     <td>
 
-                                        <a href="{% url 'lichbaoccao_update' lichbaoccao.pk %}">
+                                        <a href="{% url 'lichbaocao_update' lichbaocao.pk %}">
                                             <button type="button" class="btn btn-group-sm btn-success btn-sm">
 
                                                 Update
                                             </button>
                                         </a>
 
-                                        <a href="{% url 'lichbaoccao_delete' lichbaoccao.pk %}">
+                                        <a href="{% url 'lichbaocao_delete' lichbaocao.pk %}">
                                             <button type="button" class="btn btn-group-sm btn-danger btn-sm">Delete
                                             </button>
                                         </a>
@@ -82,7 +75,6 @@
                             </tbody>
 
                         </table>
-                    {% endif %}
                 </div>
 
 

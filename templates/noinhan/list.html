@@ -36,14 +36,6 @@
                 </div>
 
                 <div class="card-body table-responsive p-0">
-                    {% if noinhan_list.count == 0 %}
-                        <div class="card bg-gradient-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Không có Kết quả: <b>{{ request.GET.q }}</b></h3>
-                            </div>
-
-                        </div>
-                    {% else %}
                         <table class="table table-head-fixed text-nowrap">
                             <thead>
                             <tr>
@@ -79,7 +71,6 @@
                             </tbody>
 
                         </table>
-                    {% endif %}
                 </div>
 
 
