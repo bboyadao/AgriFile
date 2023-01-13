@@ -2,8 +2,99 @@
 
 {% block content %}
 
-    {% for user in user_list %}
-        <li>{{ user.username }}</li>
-    {% endfor %}
 
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Danh sách người dùng</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right"
+                                   placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-head-fixed text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Tên</th>
+                            <th>Phòng ban</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in user_list %}
+
+
+                            <tr>
+
+                                <td>{{ user.pk }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.full_name }}</td>
+                                <td><span class="tag tag-success">{{ user.phongban.name }}</span></td>
+                                <td>
+                                    <a href="{{ user.get_absolute_url }}">
+                                        detail edit delete
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="card-tools">
+                <ul class="pagination pagination-sm float-right">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">«</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    </li>
+                {% endif %}
+
+                {% for page in page_obj.paginator.page_range %}
+                    <li class="page-item">
+
+                        <a class="page-link"
+                           {% if page_obj.number == page %}
+                                href="#"
+                           {% else %}
+                           href="?page={{ page }}"
+                           {% endif %}
+                        >
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.paginator.num_pages }}">next</a></li></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">»</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}

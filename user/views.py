@@ -16,6 +16,7 @@ from user.models import User
 class ListUser(ListView):
     queryset = User.objects.all()
     model = User
+    paginate_by = 1
 
 
 class CreateUser(CreateView):

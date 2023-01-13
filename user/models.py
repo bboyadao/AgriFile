@@ -10,6 +10,7 @@ class User(AbstractUser):
     def __str__(self):
         return self.full_name.__str__()
 
+    @property
     def get_absolute_url(self):
         return reverse('user_detail', args=[self.username.__str__()])
 
