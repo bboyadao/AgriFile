@@ -7,6 +7,7 @@
     {% block nav_bar %}
     <!-- Left navbar links -->
     <ul class="navbar-nav">
+    {% comment %}
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
@@ -16,9 +17,11 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin" class="nav-link">Adminmmmmm</a>
         </li>
+        {% endcomment %}
     </ul>
 
     {% block nav_bar_center %}
+        {% comment %}
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
@@ -30,6 +33,7 @@
             </div>
         </div>
     </form>
+    {% endcomment %}
     {% endblock %}
 
     {% block nav_custom_menu %}
@@ -37,6 +41,7 @@
     <ul class="navbar-nav ml-auto">
         <ul class="nav navbar-nav">
             {% block header_dropdowns %}
+        {% comment %}
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -123,6 +128,7 @@
                 </div>
             </li>
             <!-- Notifications Dropdown Menu -->
+                {% endcomment %}
             {% block user_info %}
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
