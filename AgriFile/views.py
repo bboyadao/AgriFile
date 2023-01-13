@@ -43,9 +43,9 @@ data = [
 				"name": "Cài đặt",
 				"icon": "",
 				"navs": [
-					{"name": "Phòng ban", "icon": "", "link": "user_list"},
-					{"name": "Địa chỉ đến", "icon": "", "link": "user_list"},
-					{"name": "Lịch báo cáo", "icon": "", "link": "user_list"},
+					{"name": "Phòng ban", "icon": "", "link": "phongban_list"},
+					{"name": "Nơi nhận", "icon": "", "link": "noinhan_list"},
+					{"name": "Lịch báo cáo", "icon": "", "link": "lichbaocao_list"},
 				],
 			}
 		]

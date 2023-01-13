@@ -14,5 +14,5 @@ urlpatterns = [
 	path('login/', Login.as_view()),
 	path('admin/', admin.site.urls),
 	path('user/', include("user.urls")),
-	path('file/', include("file.urls")),
+	path('setup/', include("setmeup.urls")),
 ]

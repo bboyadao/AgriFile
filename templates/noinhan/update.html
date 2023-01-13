@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="card card-success">
+<div class="card card-info">
   <div class="card-header">
-    <h3 class="card-title">Tạo User</h3>
+    <h3 class="card-title">Sửa Nơi Nhận</h3>
   </div>
-  <form class="form-horizontal"  method="post" action=".">
+  <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
         {% for field in form %}
       <div class="form-group row">
@@ -24,7 +24,7 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-block bg-gradient-info float-right">Tạo</button>
+      <button type="submit" class="btn btn-block bg-gradient-info float-right">Sửa</button>
     </div>
     <!-- /.card-footer -->
   </form>

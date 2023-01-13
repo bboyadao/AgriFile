@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
@@ -7,39 +6,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, FormView
-
-from user.forms import UserForm, UserUpdateForm
-from user.models import User
-
-
-class ListUser(ListView):
-    queryset = User.objects.all()
-    model = User
-    paginate_by = 1
-
-
-class CreateUser(CreateView):
-    template_name = "user/user_create.html"
-    queryset = User.objects.all()
-    form_class = UserForm
-
-
-class DetailUser(DetailView):
-    template_name = "user/user_detail.html"
-    model = User
-    slug_field = "username"
-
-
-class UpdateUser(UpdateView):
-    template_name = "user/user_update.html"
-    model = User
-    slug_field = "username"
-    form_class = UserUpdateForm
-
-    def form_valid(self, form):
-        messages.success(self.request, "The task was updated successfully.")
-        return super().form_valid(form)
+from django.views.generic import FormView
 
 
 class ChangePassUser(PasswordContextMixin, FormView):
@@ -65,3 +32,4 @@ class ChangePassUser(PasswordContextMixin, FormView):
         # except the current one.
         update_session_auth_hash(self.request, form.user)
         return super().form_valid(form)
+

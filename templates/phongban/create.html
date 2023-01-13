@@ -4,9 +4,9 @@
 {% block content %}
 <div class="card card-success">
   <div class="card-header">
-    <h3 class="card-title">Tạo User</h3>
+    <h3 class="card-title">Tạo Phòng Ban</h3>
   </div>
-  <form class="form-horizontal"  method="post" action=".">
+  <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
         {% for field in form %}
       <div class="form-group row">
