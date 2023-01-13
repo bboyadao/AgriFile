@@ -3,6 +3,7 @@ from setmeup.views import ListUser, CreateUser, DetailUser, UpdateUser, ChangePa
 	NoiNhanDelete, NoiNhanUpdate, NoiNhanCreate, NoiNhanDetail, PhongBanList, PhongBanCreate, PhongBanDetail, \
 	PhongBanUpdate, PhongBanDelete, LichBaoCaoList, LichBaoCaoCreate, LichBaoCaoDetail, LichBaoCaoUpdate, \
 	LichBaoCaoDelete
+from baocao.views import BaoCaoCreate
 
 urlpatterns = [
 	path('user/', ListUser.as_view(), name="user_list"),
@@ -34,6 +35,8 @@ urlpatterns = [
 	path('lichbaocao/<int:pk>/update/', LichBaoCaoUpdate.as_view(), name="lichbaocao_update"),
 	path('lichbaocao/<int:pk>/delete/', LichBaoCaoDelete.as_view(), name="lichbaocao_delete"),
 
+	# Bao Cao
+	path('baocao/create/', BaoCaoCreate.as_view(), name="baocao_create"),
 
 
 ]

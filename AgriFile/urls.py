@@ -16,6 +16,7 @@ urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('user/', include("user.urls")),
 	path('setup/', include("setmeup.urls")),
+	path('baocao/', include("baocao.urls")),
 	path('jsi18n/', JavaScriptCatalog.as_view(), name='js-catlog'),
 
 ]

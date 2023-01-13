@@ -7,13 +7,13 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, FormView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from setmeup.forms.lichbaocao import LichBaoCaoForm
-from setmeup.forms.noinhan import NoiNhanForm
 from setmeup.models import NoiNhan, PhongBan, LichBaoCao
 from user.forms import UserForm, UserUpdateForm
 from user.models import User
+from django.views.generic.edit import FormView
 
 
 class ListUser(ListView):
@@ -22,7 +22,7 @@ class ListUser(ListView):
     paginate_by = 10
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
+        qs = super().get_queryset()
         query = self.request.GET.get('q')
         if query:
             return qs.filter(full_name__icontains=query)
@@ -88,7 +88,7 @@ class NoiNhanList(ListView):
     paginate_by = 10
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
+        qs = super().get_queryset()
         query = self.request.GET.get('q')
         if query:
             return qs.filter(name__icontains=query)
@@ -134,7 +134,7 @@ class PhongBanList(ListView):
     paginate_by = 10
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
+        qs = super().get_queryset()
         query = self.request.GET.get('q')
         if query:
             return qs.filter(name__icontains=query)
@@ -180,7 +180,7 @@ class LichBaoCaoList(ListView):
     paginate_by = 10
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
+        qs = super().get_queryset()
         query = self.request.GET.get('q')
         if query:
             return qs.filter(name__icontains=query)
@@ -217,5 +217,3 @@ class LichBaoCaoDelete(DeleteView):
     def form_valid(self, form):
         messages.error(self.request, f"Xóa lịch báo cáo thành công.")
         return super().form_valid(form)
-
-

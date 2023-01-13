@@ -1,0 +1,142 @@
+{% extends 'adminlte/base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+{% block content %}
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+    {% comment %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token%}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" value="submit"/>
+</form>
+{% endcomment %}
+    {{ form.media }}
+
+    <div class="card card-success">
+        <div class="card-header">
+            <h3 class="card-title">Tạo Lịch Báo Cáo</h3>
+        </div>
+        <form class="form-horizontal" method="post" action="."> {% csrf_token %}
+            <div class="card-body">
+                {% for field in form %}
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+                        <div class="col-sm-10">
+
+                            {{ field }}
+
+                            {% if field.help_text %}
+                                <p class="help">{{ field.help_text|safe }}</p>
+
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                    {% if field.name == "file_field" %}
+
+                        <div class="form-group row" id="files-area">
+                    <span id="filesList">
+                    <span id="files-names"></span>
+                    </span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-block bg-gradient-info float-right">Tạo</button>
+            </div>
+
+            <!-- /.card-footer -->
+
+        </form>
+
+    </div>
+
+    <style>
+        #files-area {
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        .file-block {
+            border-radius: 2px;
+            background-color: rgba(144, 163, 203, 0.2);
+            margin: 5px;
+            color: initial;
+            display: inline-flex;
+
+        &
+        > span.name {
+            padding-right: 2px;
+            width: max-content;
+            display: inline-flex;
+        }
+
+        }
+        .file-delete {
+            display: flex;
+            width: 24px;
+            color: initial;
+            background-color: #6eb4ff00;
+            font-size: large;
+            justify-content: center;
+            margin-right: 3px;
+            cursor: pointer;
+
+        &
+        :hover {
+            background-color: rgba(144, 163, 203, 0.2);
+            border-radius: 10px;
+        }
+
+        &
+        > span {
+            transform: rotate(45deg);
+        }
+
+        }
+
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <script>
+        const dt = new DataTransfer();
+
+        $("#id_file_field").on('change', function (e) {
+            for (var i = 0; i < this.files.length; i++) {
+                let fileBloc = $('<span/>', {class: 'file-block'}),
+                    fileName = $('<span/>', {class: 'name right badge badge-info', text: this.files.item(i).name});
+
+                fileBloc.append('<span class="file-delete "><i class="fas fa-times-circle"  style="color: red;"></i></span>')
+                    .append(fileName);
+
+                $("#filesList > #files-names").append(fileBloc);
+            }
+            ;
+
+            for (let file of this.files) {
+                dt.items.add(file);
+            }
+            this.files = dt.files;
+
+            $('span.file-delete').click(function () {
+                let name = $(this).next('span.name').text();
+                $(this).parent().remove();
+                for (let i = 0; i < dt.items.length; i++) {
+                    if (name === dt.items[i].getAsFile().name) {
+                        dt.items.remove(i);
+                        continue;
+                    }
+                }
+                document.getElementById('id_file_field').files = dt.files;
+            });
+        });
+    </script>
+
+{% endblock %}
