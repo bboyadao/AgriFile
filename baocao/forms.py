@@ -18,7 +18,13 @@ class BaoCaoForm(forms.ModelForm):
 				'multiple': True,
 			}),
 	)
-	thoigian = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
+	thoigian = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
+								   widget=forms.TextInput(
+										   attrs={
+											   'class': 'datetimepicker',
+											   "autocomplete": "off"
+										   }
+								   ))
 
 	class Meta:
 		model = BaoCao
@@ -36,8 +42,11 @@ class BaoCaoForm(forms.ModelForm):
 			"nguoi_duyet": "Người duyệt",
 			"nguoi_ky": "Người Ký",
 			"phongban": "Phòng ban",
-			"noinhan": "Nơi nhận"
+			"noinhan": "Nơi nhận",
+			"thoigian": "Thời gian"
 		}
 		icons = {
 			"thoigian": "far fa-clock"
 		}
+
+

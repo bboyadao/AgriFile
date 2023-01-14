@@ -32,9 +32,26 @@ class ListUser(ListView):
 
 
 class CreateUser(CreateView):
+    model = User
     template_name = "user/user_create.html"
     queryset = User.objects.all()
     form_class = UserForm
+    success_url = reverse_lazy("user_list")
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            user = form.save(commit=False)
+            import secrets
+            import string
+            alphabet = string.ascii_letters + string.digits
+            password = ''.join(secrets.choice(alphabet) for i in range(20))
+            user.set_password(password)
+            user.save()
+            messages.success(self.request, f"Tạo thành công. `{user.username} | {password}`")
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class DetailUser(DetailView):
@@ -80,7 +97,14 @@ class ChangePassUser(PasswordContextMixin, FormView):
 
 
 class DeleteUser(DeleteView):
+    template_name = "user/user_confirm_delete.html"
     model = User
+    slug_field = "username"
+    success_url = reverse_lazy("user_list")
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Xóa người dùng thành công.")
+        return super().form_valid(form)
 
 
 class NoiNhanList(ListView):
@@ -221,17 +245,12 @@ class LichBaoCaoDelete(DeleteView):
         return super().form_valid(form)
 
 
-class AdminBaoCao(ListView):
+from django_filters.views import FilterView
+
+
+class AdminBaoCao(FilterView):
     model = BaoCao
     template_name = "baocao/admin_baocao_list.html"
     filterset_class = BaoCaoFilterset
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        self.filter = self.filterset_class(self.request.GET, queryset=qs)
-        return self.filter.qs
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        a = super().get_context_data()
-        a.update(filter=self.filterset_class)
-        return a
+    paginate_by = 5
+    filter = None

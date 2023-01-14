@@ -32,7 +32,9 @@ class BaoCaoCreate(FormView):
         form = self.get_form(form_class)
         files = request.FILES.getlist('file_field')
         if form.is_valid():
-            baocao = form.save()
+            baocao = form.save(commit=False)
+            baocao.created_by = request.user
+            baocao.save()
             a = []
             for f in files:
                 a.append(MediaFile(baocao=baocao, media=f))

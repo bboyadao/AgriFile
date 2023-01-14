@@ -1,16 +1,22 @@
 {% extends 'adminlte/base.html' %}
+{% load crispy_forms_tags %}
+
 {% block page_actions %}
+
 Danh sách báo cáo
 {% endblock %}
 {% block content %}
+
+
     <div class="row">
         <div class="col-12">
-            <div class="card card-info">
+            <div class="card card-info card-outline">
                 <div class="card-header card-danger">
-<form method="get" action=".">
-        {{ filter.form.as_p }}
-        <input type="submit" value="Filter"/>
-    </form>
+
+                    <form method="get" action=".">
+                        {{ filter.form | crispy }}
+                        <input type="submit" value="Filter"/>
+                    </form>
                 </div>
                 <div class="card-body table-responsive p-0">
                         <table class="table table-head-fixed text-nowrap">
@@ -18,6 +24,7 @@ Danh sách báo cáo
                             <tr>
                                 <th>ID</th>
                                 <th>Tên</th>
+                                <th>Người gửi</th>
                                 <th>Phòng Ban</th>
                                 <th>Nơi Nhận</th>
                                 <th>Ngày Tháng</th>
@@ -29,6 +36,7 @@ Danh sách báo cáo
                                 <tr>
                                     <td>{{ obj.pk }}</td>
                                     <td>{{ obj.name }}</td>
+                                    <td>{{ obj.created_by.full_name }}</td>
                                     <td>{{ obj.phongban.name }}</td>
                                     <td>{{ obj.noinhan.name }}</td>
                                     <td>{{ obj.thoigian }}</td>
@@ -83,4 +91,23 @@ Danh sách báo cáo
             </div>
         </div>
     </div>
+
+          <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+  integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+<script>
+$("#id_thoigian_0").datetimepicker({
+  step: 30,
+  format: 'd/m/Y H:m'
+});
+$("#id_thoigian_1").datetimepicker({
+  step: 30,
+  format: 'd/m/Y H:m'
+});
+
+</script>
+
 {% endblock %}

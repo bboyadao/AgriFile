@@ -46,7 +46,7 @@ class UserForm(ModelForm):
 		}
 		labels = {
 			'username': "Số điện thoại",
-			"full_name": "Tên",
+			"full_name": "Tên đầy đủ",
 			"phongban": "Phòng ban"
 		}
 		help_texts = {

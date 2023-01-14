@@ -14,6 +14,7 @@ class BaoCao(models.Model):
 	thoigian = models.DateTimeField()
 	noinhan = models.ForeignKey("setmeup.NoiNhan", on_delete=models.SET_NULL, null=True)
 	note = models.TextField()
+	created_by = models.ForeignKey("user.User", on_delete=models.SET_NULL, null=True)
 
 	@property
 	def get_absolute_url(self):

@@ -11,8 +11,9 @@ from django.views.generic import FormView, DetailView
 from user.models import User
 
 
-class UserDetail(DetailView):
+class UserPanel(DetailView):
     model = User
+    template_name = "user/user_panel.html"
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -37,8 +38,6 @@ class ChangePassUser(PasswordContextMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-        # Updating the password logs out all other sessions for the user
-        # except the current one.
         update_session_auth_hash(self.request, form.user)
         return super().form_valid(form)
 
