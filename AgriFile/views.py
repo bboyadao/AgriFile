@@ -12,10 +12,11 @@ class Zone(object):
 
 
 class Menu(object):
-	def __init__(self, name, child, open=None):
+	def __init__(self, name, child, icon, open=None):
 		self.name = name
 		self.open = open
 		self.child = child
+		self.icon = icon
 
 
 class Nav(object):
@@ -31,33 +32,41 @@ data = [
 		"menu": [
 			{
 				"name": "Quản lý người dùng",
-				"icon": "",
+				"icon": "fa fa-user",
 				"navs": [
-
-					{"name": "Danh sách", "icon": "nav-icon fas fa-circle", "link": 'user_list'},
-					{"name": "Tạo mới", "icon": "nav-icon fas fa-circle", "link": "user_create"},
+					{"name": "Danh sách", "icon": "fa fa-list", "link": 'user_list'},
+					{"name": "Tạo mới", "icon": "fa fa-user-plus", "link": "user_create"},
 
 				]
 			},
 			{
 				"name": "Cài đặt",
-				"icon": "",
+				"icon": "nav-icon fa fa-cog",
 				"navs": [
-					{"name": "Phòng ban", "icon": "", "link": "phongban_list"},
-					{"name": "Nơi nhận", "icon": "", "link": "noinhan_list"},
-					{"name": "Lịch báo cáo", "icon": "", "link": "lichbaocao_list"},
+					{"name": "Phòng ban", "icon": "fa fa-building", "link": "phongban_list"},
+					{"name": "Nơi nhận", "icon": "fa fa-paper-plane", "link": "noinhan_list"},
+					{"name": "Lịch báo cáo", "icon": "fa fa-calendar", "link": "lichbaocao_list"},
 				],
-			}
+			},
+			{
+				"name": "Quản lý Báo Cáo",
+				"icon": "fa fa-hashtag",
+				"navs": [
+					{"name": "Danh Sách Báo Cáo", "icon": "fa fa-list-ol", "link": 'admin_baocao_list'},
+
+				]
+			},
 		]
 	},
 	{
 		"name": "WORK ZONE",
 		"menu": [
 			{
-				"name": "gggggggg",
-				"icon": "",
+				"name": "Báo cáo",
+				"icon": "fa fa-clipboard",
 				"navs": [
-					{"name": "bbb", "icon": "", "link": "user_list"}
+					{"name": "Tạo Mới", "icon": "fa fa-plus", "link": "baocao_create"},
+					{"name": "Danh Sách Đã Nộp", "icon": "fa fa-list-ol", "link": "baocao_list"}
 				]
 			},
 		]
@@ -81,7 +90,7 @@ def global_templates_context_processors(request):
 				###################
 				n = Nav(name=nav["name"], icon=nav["icon"], link=nav["link"])
 				navs.append(n)
-			m = Menu(menu["name"], child=navs, open=open_menu)
+			m = Menu(menu["name"], child=navs, icon=menu["icon"], open=open_menu)
 			menus.append(m)
 
 		z = Zone(name=zone["name"], child=menus)

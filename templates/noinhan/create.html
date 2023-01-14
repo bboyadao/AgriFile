@@ -1,11 +1,10 @@
 {% extends 'adminlte/base.html' %}
 {% load crispy_forms_tags %}
-
+{% block page_actions %}
+    Tạo Nơi Nhận
+{% endblock %}
 {% block content %}
-<div class="card card-success">
-  <div class="card-header">
-    <h3 class="card-title">Tạo Nơi Nhận</h3>
-  </div>
+<div class="card card-success card-outline">
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
         {% for field in form %}

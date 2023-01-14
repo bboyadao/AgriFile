@@ -12,6 +12,7 @@ django-adminlte-3 = "^0.1.6"
 django-crispy-forms = "^1.14.0"
 django-extensions = "^3.2.1"
 crispy-bootstrap5 = "^0.7"
+django-filter = "^22.1"
 
 
 [build-system]

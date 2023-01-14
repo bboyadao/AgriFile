@@ -2,7 +2,7 @@ from django.urls import path
 from setmeup.views import ListUser, CreateUser, DetailUser, UpdateUser, ChangePassUser, DeleteUser, NoiNhanList, \
 	NoiNhanDelete, NoiNhanUpdate, NoiNhanCreate, NoiNhanDetail, PhongBanList, PhongBanCreate, PhongBanDetail, \
 	PhongBanUpdate, PhongBanDelete, LichBaoCaoList, LichBaoCaoCreate, LichBaoCaoDetail, LichBaoCaoUpdate, \
-	LichBaoCaoDelete
+	LichBaoCaoDelete, AdminBaoCao
 from baocao.views import BaoCaoCreate
 
 urlpatterns = [
@@ -36,7 +36,7 @@ urlpatterns = [
 	path('lichbaocao/<int:pk>/delete/', LichBaoCaoDelete.as_view(), name="lichbaocao_delete"),
 
 	# Bao Cao
-	path('baocao/create/', BaoCaoCreate.as_view(), name="baocao_create"),
+	path('baocao/', AdminBaoCao.as_view(), name="admin_baocao_list"),
 
 
 ]

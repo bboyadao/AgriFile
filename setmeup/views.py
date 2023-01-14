@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+from baocao.models import BaoCao
+from setmeup.filter import BaoCaoFilterset
 from setmeup.forms.lichbaocao import LichBaoCaoForm
 from setmeup.models import NoiNhan, PhongBan, LichBaoCao
 from user.forms import UserForm, UserUpdateForm
@@ -217,3 +219,20 @@ class LichBaoCaoDelete(DeleteView):
     def form_valid(self, form):
         messages.error(self.request, f"Xóa lịch báo cáo thành công.")
         return super().form_valid(form)
+
+
+class AdminBaoCao(ListView):
+    model = BaoCao
+    template_name = "baocao/admin_baocao_list.html"
+    filterset_class = BaoCaoFilterset
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.filter = self.filterset_class(self.request.GET, queryset=qs)
+        return self.filter.qs
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        a = super().get_context_data()
+        a.update(filter=self.filterset_class)
+        print(a)
+        return a

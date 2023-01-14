@@ -1,26 +1,24 @@
 {% extends 'adminlte/base.html' %}
-
+{% block page_actions %}
+    Danh sách nơi nhận
+{% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-12">
-            <div class="card card-info">
+            <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Danh sách Nơi Nhận</h3>
                     <div class="card-tools">
-
                         <form method="get" action=".">
-
                             <div class="input-group input-group-sm" style="width: 250px;">
                                 <div class="input-group-append">
                                     <a href="{% url 'noinhan_create' %}">
-                                        <button type="button" class="btn btn-group-sm btn-success btn-sm">
-                                            Thêm
-                                            <i class="fas fa-plus"> </i>
-                                        </button>
+                                    <button type="button" class="btn btn-group-sm btn-success btn-sm">
+                                    Thêm
+                                    <i class="fas fa-plus"> </i>
+                                    </button>
                                     </a>
-                                </div>
-                                </a>
-
+                                    </div>
+                                    </a>
                                 <input type="text" name="q" class="form-control float-right"
                                        placeholder="Tìm kiếm">
                                 <div class="input-group-append">
