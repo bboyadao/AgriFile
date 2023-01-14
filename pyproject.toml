@@ -13,10 +13,6 @@ django-crispy-forms = "^1.14.0"
 django-extensions = "^3.2.1"
 crispy-bootstrap5 = "^0.7"
 django-filter = "^22.1"
-django-cruds-adminlte = "^0.0.16"
-six = "^1.16.0"
-django-utils-six = "^2.0"
-
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,113 +1,139 @@
 {% extends 'adminlte/base.html' %}
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 
 {% block page_actions %}
 
-Danh sách báo cáo
+    Danh sách báo cáo
 {% endblock %}
 {% block content %}
 
 
     <div class="row">
-        <div class="col-12">
-            <div class="card card-info card-outline">
-                <div class="card-header card-danger">
+    <div class="col-sm-12">
+        <div class="card card-warning">
+            <div class="card-header" data-card-widget="collapse">
+                <h3 class="card-title">Lọc</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
 
-                    <form method="get" action=".">
-                        {{ filter.form | crispy }}
-                        <input type="submit" value="Filter"/>
-                    </form>
-                </div>
-                <div class="card-body table-responsive p-0">
-                        <table class="table table-head-fixed text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tên</th>
-                                <th>Người gửi</th>
-                                <th>Phòng Ban</th>
-                                <th>Nơi Nhận</th>
-                                <th>Ngày Tháng</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for obj in filter.qs %}
-                                <tr>
-                                    <td>{{ obj.pk }}</td>
-                                    <td>{{ obj.name }}</td>
-                                    <td>{{ obj.created_by.full_name }}</td>
-                                    <td>{{ obj.phongban.name }}</td>
-                                    <td>{{ obj.noinhan.name }}</td>
-                                    <td>{{ obj.thoigian }}</td>
-                                    <td>
-                                        <a href="{% url 'baocao_update' obj.pk %}">
-                                            <button type="button" class="btn btn-group-sm btn-success btn-sm">
-                                                Update
-                                            </button>
-                                        </a>
-                                        <a href="{% url 'baocao_delete' obj.pk %}">
-                                            <button type="button" class="btn btn-group-sm btn-danger btn-sm">Delete
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                </div>
             </div>
-            <div class="card-tools">
-                <ul class="pagination pagination-sm float-right">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page=1">«</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
-                        </li>
-                    {% endif %}
-                    {% for page in page_obj.paginator.page_range %}
-                        <li class="page-item">
-                            <a class="page-link"
-                                    {% if page_obj.number == page %}
-                               href="#"
-                                    {% else %}
-                               href="?page={{ page }}"
-                                    {% endif %}
-                            >
-                                {{ page }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                        <li class="page-item"><a class="page-link"
-                                                 href="?page={{ page_obj.paginator.num_pages }}">next</a></li></li>
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">»</a>
-                        </li>
-                    {% endif %}
-                </ul>
+
+            <div class="card-body" style="display: block;">
+                <form method="get" action=".">
+                    <div class="row">
+                        {% for field in filter.form %}
+                            <div class="col-4">
+                                {{ field | as_crispy_field }}
+                            </div>
+                        {% endfor %}
+                        <input class="btn btn-block btn-primary btn-lg" type="submit" value="Filter"/>
+                    </div>
+
+                </form>
             </div>
         </div>
+        <div class="card card-info card-outline">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Người gửi</th>
+                        <th>Phòng Ban</th>
+                        <th>Nơi Nhận</th>
+                        <th>Ngày Tháng</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in filter.qs %}
+                        <tr>
+                            <td>{{ obj.pk }}</td>
+                            <td>{{ obj.name }}</td>
+                            <td>{{ obj.created_by.full_name }}</td>
+                            <td>{{ obj.phongban.name }}</td>
+                            <td>{{ obj.noinhan.name }}</td>
+                            <td>{{ obj.thoigian }}</td>
+                            <td>
+                                <a href="{% url 'baocao_update' obj.pk %}">
+                                    <button type="button" class="btn btn-group-sm btn-success btn-sm">
+                                        Update
+                                    </button>
+                                </a>
+                                <a href="{% url 'baocao_delete' obj.pk %}">
+                                    <button type="button" class="btn btn-group-sm btn-danger btn-sm">Delete
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-tools">
+            <ul class="pagination pagination-sm float-right">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">«</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    </li>
+                {% endif %}
+                {% for page in page_obj.paginator.page_range %}
+                    <li class="page-item">
+                        <a class="page-link"
+                                {% if page_obj.number == page %}
+                           href="#"
+                                {% else %}
+                           href="?page={{ page }}"
+                                {% endif %}
+                        >
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                    <li class="page-item">
+                        <a class="page-link"
+                                             href="?page={{ page_obj.paginator.num_pages }}">
+                            next
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">»
+                    </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+            integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
-          <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
-  integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
-  crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <script>
+        $("#id_thoigian_0").datetimepicker({
+            step: 30,
+            format: 'd/m/Y H:m'
+        });
+        $("#id_thoigian_1").datetimepicker({
+            step: 30,
+            format: 'd/m/Y H:m'
+        });
 
-<script>
-$("#id_thoigian_0").datetimepicker({
-  step: 30,
-  format: 'd/m/Y H:m'
-});
-$("#id_thoigian_1").datetimepicker({
-  step: 30,
-  format: 'd/m/Y H:m'
-});
-
-</script>
+    </script>
 
 {% endblock %}

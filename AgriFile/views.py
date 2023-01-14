@@ -1,7 +1,7 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import LoginView, PasswordContextMixin
+from django.contrib.auth.views import LoginView, PasswordContextMixin, LogoutView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
@@ -42,6 +42,10 @@ class PasswordChangeDoneView(PasswordContextMixin, TemplateView):
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
+
+
+class Logout(LogoutView):
+	template_name = "user/logged_out.html"
 
 
 class Login(LoginView):

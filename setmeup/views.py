@@ -2,12 +2,14 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import PasswordContextMixin
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django_filters.views import FilterView
 
 from baocao.models import BaoCao
 from setmeup.filter import BaoCaoFilterset
@@ -18,7 +20,8 @@ from user.models import User
 from django.views.generic.edit import FormView
 
 
-class ListUser(ListView):
+class ListUser(PermissionRequiredMixin, ListView):
+    permission_required = 'view_user'
     queryset = User.objects.all()
     model = User
     paginate_by = 10
@@ -243,9 +246,6 @@ class LichBaoCaoDelete(DeleteView):
     def form_valid(self, form):
         messages.error(self.request, f"Xóa lịch báo cáo thành công.")
         return super().form_valid(form)
-
-
-from django_filters.views import FilterView
 
 
 class AdminBaoCao(FilterView):

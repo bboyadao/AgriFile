@@ -9,20 +9,6 @@
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
         {{ form | crispy }}
-    {% comment %}
-        {% for field in  %}
-      <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
-        <div class="col-sm-10">
-          {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-
-        </div>
-      </div>
-        {% endfor %}
-{% endcomment %}
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

@@ -12,19 +12,21 @@ class BaoCaoForm(forms.ModelForm):
 			if field_name in icons:
 				field.icon = icons[field_name]
 
-	file_field = forms.FileField(required=False, label="Files",
+	file_field = forms.FileField(
+		required=False, label="Files",
 		widget=forms.ClearableFileInput(
 			attrs={
 				'multiple': True,
 			}),
 	)
-	thoigian = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
-								   widget=forms.TextInput(
-										   attrs={
-											   'class': 'datetimepicker',
-											   "autocomplete": "off"
-										   }
-								   ))
+	thoigian = forms.DateTimeField(
+		input_formats=['%d/%m/%Y %H:%M'],
+		widget=forms.TextInput(
+			attrs={
+				'class': 'datetimepicker',
+				"autocomplete": "off"
+			}
+		))
 
 	class Meta:
 		model = BaoCao
@@ -48,5 +50,3 @@ class BaoCaoForm(forms.ModelForm):
 		icons = {
 			"thoigian": "far fa-clock"
 		}
-
-

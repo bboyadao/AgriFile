@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from django.urls import path, include
-from AgriFile.views import Login, ChangePass, PasswordChangeDoneView
+from AgriFile.views import Login, ChangePass, PasswordChangeDoneView, Logout
 from django.views.i18n import JavaScriptCatalog
 
 from setmeup.views import AdminBaoCao
-from AgriFile.mid import login_exempt
 
 
-@login_exempt
 def index(request):
 	context = {}
 	return render(request, 'adminlte/index.html', context)
@@ -16,6 +14,8 @@ def index(request):
 urlpatterns = [
 	path('', index, name="index"),
 	path('login/', Login.as_view(), name="login"),
+	path('logout/', Logout.as_view(), name="logout"),
+
 	path('change_pass/', ChangePass.as_view(), name="change_pass"),
 	path(
 			"password_change/done/",

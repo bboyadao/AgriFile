@@ -16,7 +16,6 @@ LOGIN_URL = reverse_lazy("login")
 LOGIN_REDIRECT_URL = "/"
 
 INSTALLED_APPS = [
-    # 'AgriFile.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -26,7 +25,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
     'django_filters',
-    'cruds_adminlte',
     'user',
     'setmeup',
     'baocao',
