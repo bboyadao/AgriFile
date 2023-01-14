@@ -1,20 +1,24 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Row, Column
 from django import forms
-from django.contrib.admin.widgets import AdminSplitDateTime
 
 from baocao.models import BaoCao
 
 
 class BaoCaoForm(forms.ModelForm):
-	file_field = forms.FileField(label="Files",
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		icons = getattr(self.Meta, 'icons', dict())
+		for field_name, field in self.fields.items():
+			field.widget.attrs['class'] = 'form-control'
+			if field_name in icons:
+				field.icon = icons[field_name]
+
+	file_field = forms.FileField(required=False, label="Files",
 		widget=forms.ClearableFileInput(
 			attrs={
 				'multiple': True,
 			}),
 	)
-	thoigian = forms.SplitDateTimeField(label="Thời gian",
-		widget=AdminSplitDateTime())
+	thoigian = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
 
 	class Meta:
 		model = BaoCao
@@ -33,4 +37,7 @@ class BaoCaoForm(forms.ModelForm):
 			"nguoi_ky": "Người Ký",
 			"phongban": "Phòng ban",
 			"noinhan": "Nơi nhận"
+		}
+		icons = {
+			"thoigian": "far fa-clock"
 		}

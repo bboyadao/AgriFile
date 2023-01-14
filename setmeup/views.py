@@ -234,5 +234,4 @@ class AdminBaoCao(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         a = super().get_context_data()
         a.update(filter=self.filterset_class)
-        print(a)
         return a

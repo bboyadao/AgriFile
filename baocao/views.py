@@ -1,4 +1,5 @@
-from django.urls import reverse
+from django.contrib import messages
+from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView, DetailView, ListView, DeleteView, UpdateView
 
 from baocao.forms import BaoCaoForm
@@ -21,9 +22,11 @@ class BaoCaoCreate(FormView):
     def form_valid(self, form):
         item = form.save()
         self.pk = item.pk
+        messages.success(self.request, f"Tạo báo cáo thành công.")
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
+
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         files = request.FILES.getlist('file_field')

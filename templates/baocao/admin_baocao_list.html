@@ -1,29 +1,24 @@
 {% extends 'adminlte/base.html' %}
-
+{% block page_actions %}
+Danh sách báo cáo
+{% endblock %}
 {% block content %}
-
-
     <div class="row">
         <div class="col-12">
-    <form method="get" action=".">
-        {{ filter.form.as_p }}
-        <input type="submit" />
-    </form>
-
-
             <div class="card card-info">
                 <div class="card-header card-danger">
-                    <h3 class="card-title">Danh sách báo cáo</h3>
-
+<form method="get" action=".">
+        {{ filter.form.as_p }}
+        <input type="submit" value="Filter"/>
+    </form>
                 </div>
-
                 <div class="card-body table-responsive p-0">
-
                         <table class="table table-head-fixed text-nowrap">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên</th>
+                                <th>Phòng Ban</th>
                                 <th>Nơi Nhận</th>
                                 <th>Ngày Tháng</th>
                                 <th>Action</th>
@@ -34,12 +29,12 @@
                                 <tr>
                                     <td>{{ obj.pk }}</td>
                                     <td>{{ obj.name }}</td>
+                                    <td>{{ obj.phongban.name }}</td>
                                     <td>{{ obj.noinhan.name }}</td>
                                     <td>{{ obj.thoigian }}</td>
                                     <td>
                                         <a href="{% url 'baocao_update' obj.pk %}">
                                             <button type="button" class="btn btn-group-sm btn-success btn-sm">
-
                                                 Update
                                             </button>
                                         </a>
@@ -48,16 +43,11 @@
                                             </button>
                                         </a>
                                     </td>
-
                                 </tr>
-
                             {% endfor %}
                             </tbody>
-
                         </table>
                 </div>
-
-
             </div>
             <div class="card-tools">
                 <ul class="pagination pagination-sm float-right">
@@ -69,10 +59,8 @@
                             <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
                         </li>
                     {% endif %}
-
                     {% for page in page_obj.paginator.page_range %}
                         <li class="page-item">
-
                             <a class="page-link"
                                     {% if page_obj.number == page %}
                                href="#"
@@ -84,8 +72,6 @@
                             </a>
                         </li>
                     {% endfor %}
-
-
                     {% if page_obj.has_next %}
                         <li class="page-item">
                         <li class="page-item"><a class="page-link"
@@ -96,6 +82,5 @@
                 </ul>
             </div>
         </div>
-
     </div>
 {% endblock %}

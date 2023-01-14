@@ -7,4 +7,5 @@ urlpatterns = [
 	path('<int:pk>/', BaoCaoDetail.as_view(), name="baocao_detail"),
 	path('<int:pk>/update/', BaoCaoUpdate.as_view(), name="baocao_update"),
 	path('<int:pk>/delete/', BaoCaoDelete.as_view(), name="baocao_delete"),
+
 ]

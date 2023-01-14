@@ -41,7 +41,7 @@ data = [
 			},
 			{
 				"name": "Cài đặt",
-				"icon": "nav-icon fa fa-cog",
+				"icon": "nav-icon fa fa-cogs",
 				"navs": [
 					{"name": "Phòng ban", "icon": "fa fa-building", "link": "phongban_list"},
 					{"name": "Nơi nhận", "icon": "fa fa-paper-plane", "link": "noinhan_list"},
@@ -65,8 +65,9 @@ data = [
 				"name": "Báo cáo",
 				"icon": "fa fa-clipboard",
 				"navs": [
+					{"name": "Danh Sách Đã Nộp", "icon": "fa fa-list-ol", "link": "baocao_list"},
 					{"name": "Tạo Mới", "icon": "fa fa-plus", "link": "baocao_create"},
-					{"name": "Danh Sách Đã Nộp", "icon": "fa fa-list-ol", "link": "baocao_list"}
+
 				]
 			},
 		]
