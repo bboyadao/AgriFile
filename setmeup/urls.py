@@ -35,8 +35,6 @@ urlpatterns = [
 	path('lichbaocao/<int:pk>/update/', LichBaoCaoUpdate.as_view(), name="lichbaocao_update"),
 	path('lichbaocao/<int:pk>/delete/', LichBaoCaoDelete.as_view(), name="lichbaocao_delete"),
 
-	# Bao Cao
-	path('baocao/', AdminBaoCao.as_view(), name="admin_baocao_list"),
 
 
 ]

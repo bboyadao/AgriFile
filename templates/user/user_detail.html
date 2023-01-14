@@ -1,6 +1,9 @@
 {% extends 'adminlte/base.html' %}
 {% load crispy_forms_tags %}
 
+{% block page_actions %}
+    User Panel
+{% endblock %}
 {% block content %}
-    {{ obj }}
+    {{ user.username }}
 {% endblock %}

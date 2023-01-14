@@ -6,7 +6,16 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
+
+from user.models import User
+
+
+class UserDetail(DetailView):
+    model = User
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class ChangePassUser(PasswordContextMixin, FormView):

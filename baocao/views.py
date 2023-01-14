@@ -1,9 +1,10 @@
 from django.contrib import messages
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views.generic import FormView, DetailView, ListView, DeleteView, UpdateView
 
 from baocao.forms import BaoCaoForm
 from baocao.models import MediaFile, BaoCao
+# from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class BaoCaoDetail(DetailView):

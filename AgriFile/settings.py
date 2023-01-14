@@ -2,6 +2,8 @@ import os
 import sys
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-%)8-8takin@c@ixoux7q5rmr(&+3x=1l7tp9@9j2n1bzb^#3m('
@@ -9,6 +11,9 @@ SECRET_KEY = 'django-insecure-%)8-8takin@c@ixoux7q5rmr(&+3x=1l7tp9@9j2n1bzb^#3m(
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
+LOGIN_URL = reverse_lazy("login")
+LOGIN_REDIRECT_URL = "/"
 
 INSTALLED_APPS = [
     # 'AgriFile.apps.SuitConfig',
@@ -40,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'AgriFile.mid.LoginRequiredMiddleware'
 ]
 
 ROOT_URLCONF = 'AgriFile.urls'
