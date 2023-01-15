@@ -1,5 +1,5 @@
 from django.urls import path
-from baocao.views import BaoCaoCreate, BaoCaoDetail, BaoCaoList, BaoCaoUpdate, BaoCaoDelete
+from baocao.views import BaoCaoCreate, BaoCaoDetail, BaoCaoList, BaoCaoUpdate, BaoCaoDelete, AddNote
 
 urlpatterns = [
 	path('', BaoCaoList.as_view(), name="baocao_list"),
@@ -8,4 +8,5 @@ urlpatterns = [
 	path('<int:pk>/update/', BaoCaoUpdate.as_view(), name="baocao_update"),
 	path('<int:pk>/delete/', BaoCaoDelete.as_view(), name="baocao_delete"),
 
+	path('baocao/<int:pk>/add_note/', AddNote.as_view(), name="add_note"),
 ]

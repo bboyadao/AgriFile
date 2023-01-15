@@ -13,6 +13,7 @@ class DateTimePickerInput(forms.DateTimeInput):
 
 class LichBaoCaoForm(ModelForm):
 	duedate = forms.DateTimeField(
+		label="Hạn nộp",
 		input_formats=['%d/%m/%Y %H:%M'],
 		widget=forms.TextInput(
 			attrs={
@@ -42,5 +43,5 @@ class LichBaoCaoForm(ModelForm):
 
 		labels = {
 			'name': "Tên",
-			"duedate": "Hạn nộp ",
+			"duedate": "Hạn nộp",
 		}

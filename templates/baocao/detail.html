@@ -5,7 +5,7 @@
 {% block content %}
     <div class="card card-danger card-outline">
         <div class="card-header">
-            <h3 class="card-title">Chi tiết báo cáo: <b> {{ object.name}} </b></h3>
+            <h3 class="card-title">Chi tiết báo cáo: <b> {{ object.name }} </b></h3>
         </div>
         <div class="card-body" style="display: block;">
             <div class="row">
@@ -114,7 +114,7 @@
                     <br>
                     <div class="text-muted">
                         <p class="text-sm">Người duyệt
-                            <b class="d-block">{{ object.nguoi_duyet}}</b>
+                            <b class="d-block">{{ object.nguoi_duyet }}</b>
                         </p>
                         <p class="text-sm">Người ký
                             <b class="d-block">{{ object.nguoi_ky }}</b>
@@ -123,25 +123,56 @@
                     <h5 class="mt-5 text-muted">File đính kèm:</h5>
                     <ul class="list-unstyled">
                         {% for file in object.mediafile_set.all %}
-
-
-
-                        <li>
-                            <a href="{{ file.media.url }}" target="_blank" class="btn-link text-secondary">
-                                <i class="far fa-fw fa-file-word"></i>
-                                {{ file.filename }}
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ file.media.url }}" target="_blank" class="btn-link text-secondary">
+                                    <i class="far fa-fw fa-file-word"></i>
+                                    {{ file.filename }}
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
+                    <div class="text-muted">
+                        <p class="text-sm">Ghi chú
+                            <b class="d-block">{{ object.note }}</b>
+                        </p>
+                    </div>
                     <div class="text-center mt-5 mb-3">
+                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-default">Thêm ghi
+                            chú
+                        </button>
                         {% comment %}
-                        <a href="#" class="btn btn-sm btn-primary">Add files</a>
+
                         <a href="#" class="btn btn-sm btn-warning">Report contact</a>
                         {% endcomment %}
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Note</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="3" name="note"
+                              form="add_note_form">{{ object.note }}</textarea>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <form method="post" action="{% url 'add_note'  object.pk %}" id="add_note_form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+
+                </div>
+            </div>
+
         </div>
 
     </div>

@@ -1,7 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views import View
 from django.views.generic import FormView, DetailView, ListView, DeleteView, UpdateView
+from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import BaseUpdateView
 
 from baocao.forms import BaoCaoForm
 from baocao.models import MediaFile, BaoCao
@@ -63,3 +67,20 @@ class BaoCaoUpdate(UpdateView):
 
 class BaoCaoDelete(DeleteView):
     pass
+
+
+class AddNote(BaseUpdateView):
+    form_class = BaoCaoForm
+    template_name = 'baocao/detail.html'
+    model = BaoCao
+
+    def get_success_url(self):
+        return reverse('baocao_detail', kwargs={'pk': self.get_object().pk})
+
+    def post(self, request, *args, **kwargs):
+        obj = self.get_object()
+        note = request.POST.get("note", "loi roi call admin")
+        obj.note = note
+        obj.save()
+        messages.success(self.request, f"Thêm ghi chú thành công")
+        return HttpResponseRedirect(self.get_success_url())

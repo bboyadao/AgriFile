@@ -1,4 +1,5 @@
 from django.urls import path
+
 from setmeup.views import ListUser, CreateUser, DetailUser, UpdateUser, ChangePassUser, DeleteUser, NoiNhanList, \
 	NoiNhanDelete, NoiNhanUpdate, NoiNhanCreate, NoiNhanDetail, PhongBanList, PhongBanCreate, PhongBanDetail, \
 	PhongBanUpdate, PhongBanDelete, LichBaoCaoList, LichBaoCaoCreate, LichBaoCaoDetail, LichBaoCaoUpdate, \
@@ -35,5 +36,8 @@ urlpatterns = [
 	path('lichbaocao/<int:pk>/', LichBaoCaoDetail.as_view(), name="lichbaocao_detail"),
 	path('lichbaocao/<int:pk>/update/', LichBaoCaoUpdate.as_view(), name="lichbaocao_update"),
 	path('lichbaocao/<int:pk>/delete/', LichBaoCaoDelete.as_view(), name="lichbaocao_delete"),
+
+	# admin update Bao Cao
+
 
 ]

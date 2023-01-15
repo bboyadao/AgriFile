@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from django.db.models.signals import post_save
 from django.urls import reverse
 from django.utils import timezone
 
@@ -36,3 +37,9 @@ class MediaFile(models.Model):
 	media = models.FileField(upload_to=media_directory_path)
 	filename = models.CharField(max_length=255, null=True)
 	filetype = models.CharField(max_length=255, null=True)
+
+
+# @receiver(post_save, sender=BaoCao, dispatch_uid="update_to_report")
+# def update_stock(sender, instance, **kwargs):
+#     instance.product.stock -= instance.amount
+#     instance.product.save()
