@@ -1,0 +1,38 @@
+<div class="card-tools">
+            <ul class="pagination pagination-sm float-right">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">«</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    </li>
+                {% endif %}
+                {% for page in page_obj.paginator.page_range %}
+                    <li class="page-item">
+                        <a class="page-link"
+                                {% if page_obj.number == page %}
+                           href="#"
+                                {% else %}
+                           href="?page={{ page }}"
+                                {% endif %}
+                        >
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                    <li class="page-item">
+                        <a class="page-link"
+                                             href="?page={{ page_obj.paginator.num_pages }}">
+                            next
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">»
+                    </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>

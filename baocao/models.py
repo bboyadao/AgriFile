@@ -31,3 +31,5 @@ def media_directory_path(instance, filename):
 class MediaFile(models.Model):
 	baocao = models.ForeignKey("baocao.BaoCao", on_delete=models.CASCADE)
 	media = models.FileField(upload_to=media_directory_path)
+	filename = models.CharField(max_length=255, null=True)
+	filetype = models.CharField(max_length=255, null=True)

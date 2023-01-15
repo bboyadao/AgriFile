@@ -38,7 +38,11 @@ class BaoCaoCreate(FormView):
             baocao.save()
             a = []
             for f in files:
-                a.append(MediaFile(baocao=baocao, media=f))
+                print(f.__dict__)
+                a.append(MediaFile(baocao=baocao,
+                                   media=f,
+                                   filename=f._name,
+                                   filetype=f.content_type))
             MediaFile.objects.bulk_create(a)
             return self.form_valid(form)
         else:
