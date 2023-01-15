@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from AgriFile.views import Login, ChangePass, PasswordChangeDoneView, Logout
 from django.views.i18n import JavaScriptCatalog
 
-from setmeup.views import AdminBaoCao
+from setmeup.views import AdminBaoCao, NoTif
 
 
 @login_required
@@ -33,6 +33,7 @@ urlpatterns = [
 	path('user/', include("user.urls")),
 	path('setup/', include("setmeup.urls")),
 	path('baocao/', include("baocao.urls")),
+	path('notif/', NoTif.as_view(), name="notif"),
 	path('jsi18n/', JavaScriptCatalog.as_view(), name='js-catlog'),
 
 	# Admin Bao Cao

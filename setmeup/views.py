@@ -1,3 +1,4 @@
+import datetime
 import sys
 
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordContextMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
@@ -276,3 +278,19 @@ class AdminBaoCao(FilterView):
     filterset_class = BaoCaoFilterset
     paginate_by = 5
     filter = None
+
+
+class NoTif(ListView):
+    template_name = "lichbaocao/notif.html"
+    model = LichBaoCao
+    ordering = "duedate"
+
+    def get_queryset(self):
+        qs = super().get_queryset().filter(
+            duedate__range=(
+                timezone.now(),
+                timezone.now() + datetime.timedelta(days=30)
+            )
+        )
+        print(qs.query)
+        return qs

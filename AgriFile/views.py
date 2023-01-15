@@ -1,13 +1,18 @@
+import datetime
+
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView, PasswordContextMixin, LogoutView
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, TemplateView
 from django.utils.translation import gettext_lazy as _
+
+from setmeup.models import LichBaoCao
 
 
 class ChangePass(PasswordContextMixin, FormView):
@@ -149,6 +154,21 @@ def global_templates_context_processors(request):
 		elif z.name == "USER":
 			user_zone.append(z)
 		zones.append(z)
+
+	num_of_nof = LichBaoCao.objects.filter(
+		duedate__range=(
+			timezone.now(),
+			timezone.now() + datetime.timedelta(days=7)
+		)
+	).count()
+	g_data = {
+		"current_view": current_view,
+		"num_of_nof": num_of_nof
+	}
+
 	if request.user.is_superuser:
-		return {"ZONES": zones, "current_view": current_view}
-	return {"ZONES": user_zone, "current_view": current_view}
+		g_data.update(ZONES=zones)
+	else:
+		g_data.update(ZONES=user_zone)
+
+	return g_data
