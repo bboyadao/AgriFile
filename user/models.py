@@ -7,6 +7,9 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=128)
     phongban = models.ForeignKey("setmeup.PhongBan", on_delete=models.SET_NULL, null=True)
 
+    class Meta:
+        ordering = ["-pk"]
+
     def __str__(self):
         return self.full_name.__str__()
 

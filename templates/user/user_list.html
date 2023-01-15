@@ -52,6 +52,7 @@ Danh sách người dùng
                                 <th>Username</th>
                                 <th>Tên</th>
                                 <th>Phòng ban</th>
+                                <th>Last login</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -65,6 +66,7 @@ Danh sách người dùng
                                     <td>{{ user.username }}</td>
                                     <td>{{ user.full_name }}</td>
                                     <td><span class="tag tag-success">{{ user.phongban.name }}</span></td>
+                                    <td>{{ user.last_login }}</td>
                                     <td>
                                         <a href="{{ user.get_absolute_url }}">
                                             <button type="button" class="btn btn-group-sm btn-info btn-sm">

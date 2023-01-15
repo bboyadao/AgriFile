@@ -24,6 +24,9 @@ class LichBaoCao(models.Model):
     name = models.CharField(max_length=255)
     duedate = models.DateTimeField(null=True)
 
+    class Meta:
+        ordering = ["-pk"]
+
     def __str__(self):
         return self.name.__str__()
 

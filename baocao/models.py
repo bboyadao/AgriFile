@@ -16,6 +16,9 @@ class BaoCao(models.Model):
 	note = models.TextField()
 	created_by = models.ForeignKey("user.User", on_delete=models.SET_NULL, null=True)
 
+	class Meta:
+		ordering = ["-pk"]
+
 	@property
 	def get_absolute_url(self):
 		return reverse('baocao_detail', args=[self.pk.__str__()])
