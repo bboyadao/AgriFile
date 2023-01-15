@@ -1,11 +1,15 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import path, include
+from django.utils.decorators import method_decorator
+
 from AgriFile.views import Login, ChangePass, PasswordChangeDoneView, Logout
 from django.views.i18n import JavaScriptCatalog
 
 from setmeup.views import AdminBaoCao
 
 
+@login_required
 def index(request):
 	context = {}
 	return render(request, 'adminlte/index.html', context)

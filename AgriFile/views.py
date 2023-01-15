@@ -75,7 +75,7 @@ class Nav(object):
 
 data = [
 	{
-		"name": "ADMIN ZONE",
+		"name": "ADMIN",
 		"menu": [
 			{
 				"name": "Quản lý người dùng",
@@ -106,7 +106,7 @@ data = [
 		]
 	},
 	{
-		"name": "WORK ZONE",
+		"name": "USER",
 		"menu": [
 			{
 				"name": "Báo cáo",
@@ -126,6 +126,8 @@ data = [
 def global_templates_context_processors(request):
 	current_view = request.resolver_match.url_name
 	zones = []
+	user_zone = []
+	admin_zone = []
 	for zone in data:
 		menus = []
 		for menu in zone["menu"]:
@@ -142,6 +144,11 @@ def global_templates_context_processors(request):
 			menus.append(m)
 
 		z = Zone(name=zone["name"], child=menus)
+		if z.name == "ADMIN":
+			admin_zone.append(z)
+		elif z.name == "USER":
+			user_zone.append(z)
 		zones.append(z)
-
-	return {"ZONES": zones, "current_view": current_view}
+	if request.user.is_superuser:
+		return {"ZONES": zones, "current_view": current_view}
+	return {"ZONES": user_zone, "current_view": current_view}

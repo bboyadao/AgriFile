@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import FormView, DetailView, ListView, DeleteView, UpdateView
 
@@ -44,10 +45,12 @@ class BaoCaoCreate(FormView):
             return self.form_invalid(form)
 
 
-class BaoCaoList(ListView):
+class BaoCaoList(LoginRequiredMixin, ListView):
     model = BaoCao
     template_name = "baocao/list.html"
-    # update qs
+
+    def get_queryset(self):
+        return super().get_queryset().filter(created_by=self.request.user)
 
 
 class BaoCaoUpdate(UpdateView):

@@ -52,7 +52,9 @@ Danh sách Lịch
 
                                     <td>{{ lichbaocao.pk }}</td>
                                     <td>{{ lichbaocao.name }}</td>
-                                    <td>{{ lichbaocao.deadline }}</td>
+                                    <td>{{ lichbaocao.duedate |date:'d/m/Y H:i' }} <br>
+                                        ({{ lichbaocao.duedate }})
+                                    </td>
                                     <td>
 
                                         <a href="{% url 'lichbaocao_update' lichbaocao.pk %}">

@@ -1,3 +1,5 @@
+import sys
+
 import django
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
@@ -10,11 +12,9 @@ from user.models import User
 from setmeup.models import PhongBan
 
 
-def getchoice():
-	try:
-		return PhongBan.objects.all()
-	except django.db.utils.OperationalError:
-		return []
+class _UserForm(ModelForm):
+	model = User
+	fields = ["username", "full_name", "phongban"]
 
 
 class UserForm(ModelForm):
@@ -38,11 +38,11 @@ class UserForm(ModelForm):
 				'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
 			}
 		}
-		PB = PhongBan.objects.all()
+
 		widgets = {
 			'username': NumberInput(),
-			'phongban':  forms.Select(choices=PB)
-			# 'phongban':  forms.(choices=lazy(PhongBan.objects.all()))
+			'phongban':  forms.Select(choices=PhongBan.objects.all())
+			# 'phongban':  forms.Select()
 		}
 		labels = {
 			'username': "Số điện thoại",
@@ -68,6 +68,7 @@ class UserUpdateForm(ModelForm):
 		widgets = {
 			'username': NumberInput(),
 			'phongban':  forms.Select(choices=PhongBan.objects.all())
+			# 'phongban': forms.Select()
 		}
 		labels = {
 			'username': "Số điện thoại",
@@ -77,3 +78,16 @@ class UserUpdateForm(ModelForm):
 		help_texts = {
 			'username': 'Sđt (09xxx)',
 		}
+
+
+class _UserUpdateForm(ModelForm):
+	class Meta:
+		model = User
+		fields = ["full_name", "phongban"]
+
+if 'makemigrations' not in sys.argv and 'migrate' not in sys.argv:
+	UserUpdateForm = UserUpdateForm
+	UserForm = UserForm
+else:
+	UserUpdateForm = _UserUpdateForm
+	UserForm = _UserForm

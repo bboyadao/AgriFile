@@ -12,7 +12,14 @@ class DateTimePickerInput(forms.DateTimeInput):
 
 
 class LichBaoCaoForm(ModelForm):
-	duedate = forms.SplitDateTimeField(widget=AdminSplitDateTime())
+	duedate = forms.DateTimeField(
+		input_formats=['%d/%m/%Y %H:%M'],
+		widget=forms.TextInput(
+			attrs={
+				'class': 'datetimepicker',
+				"autocomplete": "off"
+			}
+		))
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -28,24 +35,12 @@ class LichBaoCaoForm(ModelForm):
 
 	class Meta:
 		model = LichBaoCao
-		# fields = ["name", "duedate"]
-		fields = "__all__"
-
+		fields = ["name", "duedate"]
 		widgets = {
 			'name': forms.TextInput(),
-			# "duedate": AdminSplitDateTime()
 		}
-		# error_messages = {
-		# 	NON_FIELD_ERRORS: {
-		# 		'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
-		# 	}
-		# }
-		#
-		#
-		# labels = {
-		# 	'name': "Tên",
-		# 	"duedate": "Ngày",
-		# }
-		# help_texts = {
-		# 	'duedate': 'Click để chọn',
-		# }
+
+		labels = {
+			'name': "Tên",
+			"duedate": "Hạn nộp ",
+		}

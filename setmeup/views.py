@@ -1,9 +1,12 @@
+import sys
+
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordContextMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
@@ -15,9 +18,10 @@ from baocao.models import BaoCao
 from setmeup.filter import BaoCaoFilterset
 from setmeup.forms.lichbaocao import LichBaoCaoForm
 from setmeup.models import NoiNhan, PhongBan, LichBaoCao
-from user.forms import UserForm, UserUpdateForm
+from user.forms import UserUpdateForm, UserForm
 from user.models import User
 from django.views.generic.edit import FormView
+# if 'makemigrations' not in sys.argv and 'migrate' not in sys.argv:
 
 
 class ListUser(PermissionRequiredMixin, ListView):
@@ -51,7 +55,7 @@ class CreateUser(CreateView):
             password = ''.join(secrets.choice(alphabet) for i in range(20))
             user.set_password(password)
             user.save()
-            messages.success(self.request, f"Tạo thành công. `{user.username} | {password}`")
+            messages.success(self.request, f"Tạo thành công: <strong>{user.username} | {password}</strong>`")
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -63,6 +67,24 @@ class DetailUser(DetailView):
     slug_field = "username"
 
 
+class ResetPass(UpdateView):
+    template_name = "user/user_list.html"
+    model = User
+    slug_field = "username"
+    fields = []
+
+    def get(self, request, *args, **kwargs):
+        obj = self.get_object()
+        import secrets
+        import string
+        alphabet = string.ascii_letters + string.digits
+        password = ''.join(secrets.choice(alphabet) for i in range(20))
+        obj.set_password(password)
+        obj.save()
+        messages.success(self.request, f"Reset password thành công: <strong>{obj.username} | {password}</strong>")
+        return HttpResponseRedirect(reverse_lazy("user_list"))
+
+
 class UpdateUser(UpdateView):
     template_name = "user/user_update.html"
     model = User
@@ -70,7 +92,7 @@ class UpdateUser(UpdateView):
     form_class = UserUpdateForm
 
     def form_valid(self, form):
-        messages.success(self.request, "The task was updated successfully.")
+        messages.success(self.request, "Cập nhật thông tin thành công.")
         return super().form_valid(form)
 
 
@@ -234,7 +256,7 @@ class LichBaoCaoUpdate(UpdateView):
     form_class = LichBaoCaoForm
 
     def form_valid(self, form):
-        messages.success(self.request, f"Sửa nơi nhận thành công.")
+        messages.success(self.request, f"Sửa lịch báo cáo thành công")
         return super().form_valid(form)
 
 

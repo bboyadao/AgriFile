@@ -1,10 +1,12 @@
 default: mk mi cac su mock
-
+docker: b tag p
 b:
-	docker build -t chuthe:latest -f Dockerfile .
-	docker tag chuthe:latest 0x7c/chuthe:latest
+	docker build -t agrifile:latest -f Dockerfile .
 p:
-	docker push 0x7c/chuthe
+	docker push 0x7c/agrifile
+
+tag:
+	docker tag agrifile:latest 0x7c/agrifile:latest
 
 r:
 	python manage.py runserver

@@ -6,20 +6,6 @@
     Tạo Báo Cáo
 {% endblock %}
 {% block content %}
-    {% comment %}
-    <script src="{% url 'js-catlog' %}"></script>
-    <script src="{% static '/admin/js/core.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-    {{ form.media }}
-{% endcomment %}
-<script
-  src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
-  integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
-  crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-
     <div class="card card-primary card-outline">
         <form enctype="multipart/form-data" class="form-horizontal" method="post" action="."> {% csrf_token %}
             <div class="card-body">
@@ -102,46 +88,8 @@
 
     </style>
 
+{% include "adminlte/datetimepicker.html" %}
 <script>
-$("#id_thoigian").datetimepicker({
-  step: 30,
-  format: 'd/m/Y H:m'
-});
-
+    mondatetimepicker("#id_thoigian")
 </script>
-    <script>
-        const dt = new DataTransfer();
-
-        $("#id_file_field").on('change', function (e) {
-            for (var i = 0; i < this.files.length; i++) {
-                let fileBloc = $('<span/>', {class: 'file-block'}),
-                    fileName = $('<span/>', {class: 'name right badge badge-info', text: this.files.item(i).name});
-
-                fileBloc.append('<span class="file-delete "><i class="fas fa-times-circle"  style="color: red;"></i></span>')
-                    .append(fileName);
-
-                $("#filesList > #files-names").append(fileBloc);
-            }
-            ;
-
-            for (let file of this.files) {
-                dt.items.add(file);
-            }
-            this.files = dt.files;
-
-            $('span.file-delete').click(function () {
-                let name = $(this).next('span.name').text();
-                $(this).parent().remove();
-                for (let i = 0; i < dt.items.length; i++) {
-                    if (name === dt.items[i].getAsFile().name) {
-                        dt.items.remove(i);
-                        continue;
-                    }
-                }
-                document.getElementById('id_file_field').files = dt.files;
-            });
-        });
-    </script>
-
-
 {% endblock %}

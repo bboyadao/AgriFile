@@ -1,9 +1,9 @@
 {% extends 'adminlte/base.html' %}
+{% load static %}
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 
 {% block page_actions %}
-
     Danh sách báo cáo
 {% endblock %}
 {% block content %}
@@ -116,24 +116,10 @@
         </div>
     </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
-            integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo="
-            crossorigin="anonymous"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
-    <script>
-        $("#id_thoigian_0").datetimepicker({
-            step: 30,
-            format: 'd/m/Y H:m'
-        });
-        $("#id_thoigian_1").datetimepicker({
-            step: 30,
-            format: 'd/m/Y H:m'
-        });
-
-    </script>
-
+{% include 'adminlte/datetimepicker.html' %}
+<script>
+mondatetimepicker("#id_thoigian_0")
+mondatetimepicker("#id_thoigian_1")
+</script>
 {% endblock %}

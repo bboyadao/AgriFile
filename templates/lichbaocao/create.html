@@ -1,39 +1,16 @@
 {% extends 'adminlte/base.html' %}
+{% load crispy_forms_filters %}
 {% load static i18n crispy_forms_tags %}
+{% block page_actions %}
+Tạo Lịch Báo Cáo
 
+{% endblock %}
 {% block content %}
-<script src="{% url 'js-catlog' %}"></script>
-<script src="{% static '/admin/js/core.js' %}"></script>
-<link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-<link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-{% comment %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token%}
-    {{ form.media }}
-    {{ form.as_p }}
-    <input type="submit" value="submit"/>
-</form>
-{% endcomment %}
-{{ form.media }}
+<div class="card card-success card-outline">
 
-<div class="card card-success">
-  <div class="card-header">
-    <h3 class="card-title">Tạo Lịch Báo Cáo</h3>
-  </div>
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
-        {% for field in form %}
-      <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
-        <div class="col-sm-10">
-          {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-
-        </div>
-      </div>
-        {% endfor %}
+        {{ form | crispy }}
 
     </div>
     <!-- /.card-body -->
@@ -45,6 +22,8 @@
 
 </div>
 
-
-
+{% include "adminlte/datetimepicker.html" %}
+<script>
+mondatetimepicker("#id_duedate")
+</script>
 {% endblock %}

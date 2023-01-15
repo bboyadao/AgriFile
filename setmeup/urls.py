@@ -2,8 +2,7 @@ from django.urls import path
 from setmeup.views import ListUser, CreateUser, DetailUser, UpdateUser, ChangePassUser, DeleteUser, NoiNhanList, \
 	NoiNhanDelete, NoiNhanUpdate, NoiNhanCreate, NoiNhanDetail, PhongBanList, PhongBanCreate, PhongBanDetail, \
 	PhongBanUpdate, PhongBanDelete, LichBaoCaoList, LichBaoCaoCreate, LichBaoCaoDetail, LichBaoCaoUpdate, \
-	LichBaoCaoDelete, AdminBaoCao
-from baocao.views import BaoCaoCreate
+	LichBaoCaoDelete, ResetPass
 
 urlpatterns = [
 	path('user/', ListUser.as_view(), name="user_list"),
@@ -13,6 +12,8 @@ urlpatterns = [
 	path('user/<slug:slug>/set_pass/', ChangePassUser.as_view(), name="admin_set_user_pass"),
 	path('user/<slug:slug>/change_pass/', ChangePassUser.as_view(), name="user_change_pass"),
 	path('user/<slug:slug>/delete/', DeleteUser.as_view(), name="user_delete"),
+	path('reset_pass/<slug:slug>/', ResetPass.as_view(), name="reset_pass"),
+
 
 	# noi nhan
 	path('noinhan/', NoiNhanList.as_view(), name="noinhan_list"),
@@ -34,7 +35,5 @@ urlpatterns = [
 	path('lichbaocao/<int:pk>/', LichBaoCaoDetail.as_view(), name="lichbaocao_detail"),
 	path('lichbaocao/<int:pk>/update/', LichBaoCaoUpdate.as_view(), name="lichbaocao_update"),
 	path('lichbaocao/<int:pk>/delete/', LichBaoCaoDelete.as_view(), name="lichbaocao_delete"),
-
-
 
 ]

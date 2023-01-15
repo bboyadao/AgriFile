@@ -1,0 +1,67 @@
+{% load static %}
+
+<script src="{% static 'js/jq.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datetimepicker.full.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/datetimepicker.css' %}">
+
+<script>
+    function mondatetimepicker(ele) {
+        jQuery.datetimepicker.setLocale('vi');
+        $(ele).datetimepicker({
+            i18n: {
+                vi: {
+                    closeText: "Đóng",
+                    prevText: "Trước",
+                    nextText: "Sau",
+                    currentText: "Hôm nay",
+                    monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+                    monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+                    dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+                    dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+                    dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+                    weekHeader: "Tuần",
+                    dateFormat: "dd/mm/yy",
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: ""
+                },
+            },
+            step: 30,
+            format: 'd/m/Y H:m',
+            lang: "VI"
+        });
+    }
+</script>
+<script>
+        const dt = new DataTransfer();
+        $("#id_file_field").on('change', function (e) {
+            for (var i = 0; i < this.files.length; i++) {
+                let fileBloc = $('<span/>', {class: 'file-block'}),
+                    fileName = $('<span/>', {class: 'name right badge badge-info', text: this.files.item(i).name});
+
+                fileBloc.append('<span class="file-delete "><i class="fas fa-times-circle"  style="color: red;"></i></span>')
+                    .append(fileName);
+
+                $("#filesList > #files-names").append(fileBloc);
+            }
+            ;
+
+            for (let file of this.files) {
+                dt.items.add(file);
+            }
+            this.files = dt.files;
+
+            $('span.file-delete').click(function () {
+                let name = $(this).next('span.name').text();
+                $(this).parent().remove();
+                for (let i = 0; i < dt.items.length; i++) {
+                    if (name === dt.items[i].getAsFile().name) {
+                        dt.items.remove(i);
+                        continue;
+                    }
+                }
+                document.getElementById('id_file_field').files = dt.files;
+            });
+        });
+    </script>
