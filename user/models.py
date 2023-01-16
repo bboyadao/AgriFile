@@ -19,7 +19,7 @@ class User(AbstractUser):
         ordering = ["-pk"]
 
     def __str__(self):
-        return f"{self.full_name.__str__() or self.username}-{self.title.name}-{self.phongban.name}"
+        return f"{self.full_name.__str__() or self.username}.....{self.phongban.name}"
 
     @property
     def get_absolute_url(self):

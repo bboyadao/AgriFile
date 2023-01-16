@@ -1,0 +1,95 @@
+{% extends 'adminlte/base.html' %}
+{% load static i18n crispy_forms_tags %}
+
+
+{% block page_actions %}
+    Sửa Báo Cáo
+{% endblock %}
+{% block content %}
+    <div class="card card-primary card-outline">
+        <form enctype="multipart/form-data" class="form-horizontal" method="post" action="."> {% csrf_token %}
+            <div class="card-body">
+                {% for field in form %}
+                    <div class="form-group row">
+                        <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+                        <div class="col-sm-10">
+
+
+                            {{ field }}
+{{ field.errors }}
+                            {% if field.help_text %}
+                                <p class="help">{{ field.help_text|safe }}</p>
+
+                            {% endif %}
+
+
+
+                        </div>
+                    </div>
+                    {% if field.name == "file_field" %}
+                    {% endif %}
+                {% endfor %}
+            <div class="form-group row" id="files-area">
+                    <span id="filesList">
+                    <span id="files-names"></span>
+                    </span>
+                    </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-block bg-gradient-info float-right">Sửa</button>
+            </div>
+
+            <!-- /.card-footer -->
+
+        </form>
+    </div>
+    <style>
+        #files-area {
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        .file-block {
+            border-radius: 2px;
+            margin: 5px;
+            color: initial;
+            display: inline-flex;
+        &
+        > span.name {
+            padding-right: 2px;
+            width: max-content;
+            display: inline-flex;
+        }
+
+        }
+        .file-delete {
+            display: flex;
+            width: 24px;
+            color: initial;
+            background-color: #6eb4ff00;
+            font-size: large;
+            justify-content: center;
+            margin-right: 3px;
+            cursor: pointer;
+
+        &
+        :hover {
+            background-color: rgba(144, 163, 203, 0.2);
+            border-radius: 10px;
+        }
+
+        &
+        > span {
+            transform: rotate(45deg);
+        }
+
+        }
+
+    </style>
+
+{% include "adminlte/datetimepicker.html" %}
+<script>
+    mondatetimepicker("#id_thoigian")
+</script>
+{% endblock %}

@@ -142,4 +142,11 @@ for i in a:
 	u.username = settings.USER_IMPORT_PREFIX + username
 	aa.append(u)
 
+User.objects.bulk_create(aa)
 
+User.objects.create_superuser(
+	username="admin",
+	email="admin@gmail.com",
+	password="admin123",
+	phongban=PhongBan.objects.last(),
+	title=Title.objects.last())

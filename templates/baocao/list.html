@@ -1,12 +1,14 @@
 {% extends 'adminlte/base.html' %}
 {% block page_actions %}
-Danh sách báo cáo
+Danh sách đã nộp
+
 {% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-12">
-            <div class="card card-info">
+            <div class="card card-primary card-outline">
                 <div class="card-header card-danger">
+                    <h3 class="card-title"></h3>
                     <div class="card-tools">
                         <form method="get" action=".">
                             <div class="input-group input-group-sm" style="width: 250px;">
@@ -33,50 +35,53 @@ Danh sách báo cáo
                     </div>
                 </div>
 
-                <div class="card-body table-responsive p-0">
-
-                        <table class="table table-head-fixed text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tên</th>
-                                <th>Ngày Tháng</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for lichbaocao in lichbaocao_list %}
-                                <tr>
-
-                                    <td>{{ lichbaocao.pk }}</td>
-                                    <td>{{ lichbaocao.name }}</td>
-                                    <td>{{ lichbaocao.deadline }}</td>
-                                    <td>
-
-                                        <a href="{% url 'baocao_update' lichbaocao.pk %}">
-                                            <button type="button" class="btn btn-group-sm btn-success btn-sm">
-
-                                                Update
-                                            </button>
-                                        </a>
-
-                                        <a href="{% url 'baocao_delete' lichbaocao.pk %}">
-                                            <button type="button" class="btn btn-group-sm btn-danger btn-sm">Delete
-                                            </button>
-                                        </a>
-                                    </td>
-
-                                </tr>
-
-                            {% endfor %}
-                            </tbody>
-
-                        </table>
-                </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Người gửi</th>
+                        <th>Phòng Ban</th>
+                        <th>Nơi Nhận</th>
+                        <th>Ngày Tháng</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in object_list %}
+                        <tr>
+                            <td>{{ obj.pk }}</td>
+                            <td>{{ obj.name }}</td>
+                            <td>{{ obj.created_by.full_name }}</td>
+                            <td>{{ obj.phongban.name }}</td>
+                            <td>{{ obj.noinhan.name }}</td>
+                            <td>{{ obj.thoigian }}</td>
+                            <td>
+                                <a href="{% url 'baocao_detail' obj.pk %}">
+                                    <button type="button" class="btn btn-group-sm btn-info btn-sm">
+                                        Detail
+                                    </button>
+                                </a>
+                                <a href="{% url 'baocao_update' obj.pk %}">
+                                    <button type="button" class="btn btn-group-sm btn-success btn-sm">
+                                        Update
+                                    </button>
+                                </a>
+                                <a href="{% url 'baocao_delete' obj.pk %}">
+                                    <button type="button" class="btn btn-group-sm btn-danger btn-sm">Delete
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
 
             </div>
-            {% include 'adminlte/paging.html' %}
+            {% include "adminlte/paging.html" %}
         </div>
 
     </div>

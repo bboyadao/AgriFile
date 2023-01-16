@@ -22,7 +22,7 @@ class BaoCao(models.Model):
 	note = models.TextField()
 	thoigian = models.DateTimeField()
 	created_by = models.ForeignKey(
-		"user.User", on_delete=models.SET_NULL, null=True)
+		"user.User", on_delete=models.PROTECT)
 
 	class Meta:
 		ordering = ["-pk"]

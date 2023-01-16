@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
@@ -17,7 +17,8 @@ class BaoCaoDetail(DetailView):
     template_name = 'baocao/detail.html'
 
 
-class BaoCaoCreate(FormView):
+class BaoCaoCreate(LoginRequiredMixin, FormView):
+
     form_class = BaoCaoForm
     template_name = 'baocao/create.html'
     pk = None
@@ -58,11 +59,20 @@ class BaoCaoList(LoginRequiredMixin, ListView):
     template_name = "baocao/list.html"
 
     def get_queryset(self):
-        return super().get_queryset().filter(created_by=self.request.user)
+        return BaoCao.objects.filter(created_by=self.request.user)
 
 
 class BaoCaoUpdate(UpdateView):
-    pass
+    model = BaoCao
+    form_class = BaoCaoForm
+    template_name = 'baocao/update.html'
+
+    def get_success_url(self):
+        return reverse("baocao_detail", kwargs={'pk': self.get_object().pk})
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Sửa báo cáo thành công.")
+        return super().form_valid(form)
 
 
 class BaoCaoDelete(DeleteView):

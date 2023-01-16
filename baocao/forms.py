@@ -13,13 +13,14 @@ class BaoCaoForm(forms.ModelForm):
 				field.icon = icons[field_name]
 
 	file_field = forms.FileField(
-		required=False, label="Files",
+		required=False, label="File đính kèm",
 		widget=forms.ClearableFileInput(
 			attrs={
 				'multiple': True,
 			}),
 	)
 	thoigian = forms.DateTimeField(
+		label="Thời gian",
 		input_formats=['%d/%m/%Y %H:%M'],
 		widget=forms.TextInput(
 			attrs={
@@ -34,6 +35,7 @@ class BaoCaoForm(forms.ModelForm):
 			"name", "noidung",
 			"nguoi_duyet", "nguoi_ky",
 			"phongban", "noinhan",
+			"nguoi_soan",
 			"thoigian",
 			"file_field"
 		]
@@ -45,7 +47,8 @@ class BaoCaoForm(forms.ModelForm):
 			"nguoi_ky": "Người Ký",
 			"phongban": "Phòng ban",
 			"noinhan": "Nơi nhận",
-			"thoigian": "Thời gian"
+			"thoigian": "Thời gian",
+			"nguoi_soan": "Người soạn"
 		}
 		icons = {
 			"thoigian": "far fa-clock"

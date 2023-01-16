@@ -16,7 +16,7 @@
                 <div class="card-body">
                     {% for nof in lichbaocao_list %}
 
-                        <div class="callout {{ nof.get_class_by_time }}">
+                        <div class="callout bg-{{ nof.get_class_hell }} {{ nof.get_class_by_time }}">
                             <h5>{{ nof.name }}</h5>
                             <b>{{ nof.duedate }}</b> <br>
                             {% if nof.get_delta_days == 0 or nof.get_delta_days == -1 %}
@@ -24,6 +24,7 @@
                             {% else %}
                             <b>Trong {{ nof.get_delta_days }} ngày tới </b>
                             {% endif %}
+                        <br>
                         {% if nof.noidung %}
                             <p>{{ nof.noidung }}</p>
                         {% endif %}

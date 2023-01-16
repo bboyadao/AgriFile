@@ -22,7 +22,7 @@ class UserForm(ModelForm):
 
 	class Meta:
 		model = User
-		fields = ["username", "full_name", "phongban"]
+		fields = ["username", "full_name", "title", "phongban"]
 		error_messages = {
 			NON_FIELD_ERRORS: {
 				'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
@@ -35,7 +35,8 @@ class UserForm(ModelForm):
 		labels = {
 			'username': "Số điện thoại",
 			"full_name": "Tên đầy đủ",
-			"phongban": "Phòng ban"
+			"phongban": "Phòng ban",
+			"title": "Chức danh"
 		}
 		help_texts = {
 			'username': 'Sđt (09xxx)',

@@ -109,15 +109,21 @@
                         Nội Dung
                     </h4>
                     <p class="text-muted">
-                        {{ object.noidung }}
+                        <pre>{{ object.noidung }}</pre>
                     </p>
                     <br>
                     <div class="text-muted">
                         <p class="text-sm">Người duyệt
-                            <b class="d-block">{{ object.nguoi_duyet }}</b>
+                            <b class="d-block">{{ object.nguoi_duyet.full_name }}</b>
                         </p>
                         <p class="text-sm">Người ký
-                            <b class="d-block">{{ object.nguoi_ky }}</b>
+                            <b class="d-block">{{ object.nguoi_ky.full_name }}</b>
+                        </p>
+                        <p class="text-sm">Người soạn
+                            <b class="d-block">{{ object.nguoi_soan.full_name }}</b>
+                        </p>
+                        <p class="text-sm">Người tạo
+                            <b class="d-block">{{ object.created_by.full_name }}</b>
                         </p>
                     </div>
                     <h5 class="mt-5 text-muted">File đính kèm:</h5>
@@ -131,15 +137,25 @@
                             </li>
                         {% endfor %}
                     </ul>
-                    <div class="text-muted">
-                        <p class="text-sm">Ghi chú
-                            <b class="d-block">{{ object.note }}</b>
-                        </p>
-                    </div>
+                    {% if object.note %}
+                        <div class="text-muted">
+                            <p class="text-sm">Ghi chú
+                                <pre class="d-block">{{ object.note }}</pre>
+                            </p>
+                        </div>
+                    {% endif %}
                     <div class="text-center mt-5 mb-3">
-                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-default">Thêm ghi
-                            chú
+
+                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-default">
+                            {% if object.note %}
+                                Sửa ghi chú
+                            {% else %}
+                                Thêm ghi chú
+                            {% endif %}
                         </button>
+                    <a href="{% url 'baocao_update' object.pk %}" class="btn btn-sm btn-primary">
+                        Sửa báo cáo
+                    </a>
                         {% comment %}
 
                         <a href="#" class="btn btn-sm btn-warning">Report contact</a>
