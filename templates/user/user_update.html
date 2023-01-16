@@ -6,19 +6,17 @@
 Cập nhật người dùng
 {% endblock %}
 {% block content %}
+<div class="card card-primary card-outline">
 
-<div class="card card-info card-outline">
+  <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
-        <form action="." method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-            <inut type="submit" class="btn btn-block bg-gradient-info float-right">Update</inut>
-</form>
+        {{ form | crispy }}
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-
+      <button type="submit" class="btn btn-block bg-gradient-info float-right">Cập nhật</button>
     </div>
     <!-- /.card-footer -->
+  </form>
 </div>
 {% endblock %}

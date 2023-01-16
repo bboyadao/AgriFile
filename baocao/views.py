@@ -59,7 +59,11 @@ class BaoCaoList(LoginRequiredMixin, ListView):
     template_name = "baocao/list.html"
 
     def get_queryset(self):
-        return BaoCao.objects.filter(created_by=self.request.user)
+        qs = BaoCao.objects.filter(created_by=self.request.user)
+        query = self.request.GET.get('q')
+        if query:
+            return qs.filter(name__icontains=query)
+        return qs
 
 
 class BaoCaoUpdate(UpdateView):

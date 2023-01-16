@@ -17,16 +17,23 @@
                     {% for nof in lichbaocao_list %}
 
                         <div class="callout bg-{{ nof.get_class_hell }} {{ nof.get_class_by_time }}">
-                            <h5>{{ nof.name }}</h5>
-                            <b>{{ nof.duedate }}</b> <br>
+                            <h5>{{ nof.name }} (
+                                <td class="text-{{ nof.get_class_hell }}">
+                                        {{ nof.get_kind_display }}
+                                        {% if nof.kind == nof.Loai.dinhky %}
+                                            - {{ nof.get_dinhky_display }}
+                                        {% endif %}
+                                    </td>
+                                )</h5>
                             {% if nof.get_delta_days == 0 or nof.get_delta_days == -1 %}
-                                <b>Trong hôm nay </b>
+                                <b>Hoàn thành trong hôm nay: </b>
                             {% else %}
-                            <b>Trong {{ nof.get_delta_days }} ngày tới </b>
+                                <b>(Trong {{ nof.get_delta_days }} ngày tới) </b>
                             {% endif %}
+                        <b>{{ nof.duedate }}</b> <br>
                         <br>
                         {% if nof.noidung %}
-                            <p>{{ nof.noidung }}</p>
+                            <pre>{{ nof.noidung }}</pre>
                         {% endif %}
                         </div>
                     {% endfor %}

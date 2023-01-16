@@ -3,7 +3,7 @@
 {% block breadcrumbs %}
 {% endblock %}
 {% block content %}
-    <div class="card card-danger card-outline">
+    <div class="card card-primary card-outline">
         <div class="card-header">
             <h3 class="card-title">Chi tiết báo cáo: <b> {{ object.name }} </b></h3>
         </div>
@@ -126,7 +126,7 @@
                             <b class="d-block">{{ object.created_by.full_name }}</b>
                         </p>
                     </div>
-                    <h5 class="mt-5 text-muted">File đính kèm:</h5>
+                    <h5 class="mt-5 text-muted">File đính kèm: {{ object.mediafile_set.count }}</h5>
                     <ul class="list-unstyled">
                         {% for file in object.mediafile_set.all %}
                             <li>

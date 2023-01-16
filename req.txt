@@ -41,3 +41,13 @@
     + Danh sách lịch báo cáo theo phòng.
 
 - Notif: Theo lịch.
+############
+Nơi nhận ?
+title ?
+lich bao cao => done
+bao cao dua tren lich ?
+bao cao -> thoi gian
+
+notif count?
+
+thong ke realtime ?

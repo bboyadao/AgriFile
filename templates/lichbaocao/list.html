@@ -34,9 +34,7 @@ Danh sách Lịch
 
                     </div>
                 </div>
-
                 <div class="card-body table-responsive p-0">
-
                         <table class="table table-head-fixed text-nowrap">
                             <thead>
                             <tr>
@@ -56,7 +54,11 @@ Danh sách Lịch
 
                                     <td><pre>{{ lichbaocao.noidung }}</pre></td>
                                     <td class="text-{{ lichbaocao.get_class_hell }}">
-                                        <b>{{ lichbaocao.get_kind_display }}</b>
+                                        <b>{{ lichbaocao.get_kind_display }}
+                                        {% if lichbaocao.kind == lichbaocao.Loai.dinhky %}
+                                            ({{ lichbaocao.get_dinhky_display }})
+                                        {% endif %}
+                                        </b>
                                     </td>
                                     <td>{{ lichbaocao.duedate |date:'d/m/Y H:i' }} <br>
                                         ({{ lichbaocao.duedate }})
