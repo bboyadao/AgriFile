@@ -9,13 +9,20 @@ from django.utils import timezone
 class BaoCao(models.Model):
 	name = models.CharField(max_length=255)
 	noidung = models.TextField()
-	nguoi_duyet = models.CharField(max_length=255)
-	nguoi_ky = models.CharField(max_length=255)
-	phongban = models.ForeignKey("setmeup.PhongBan", on_delete=models.SET_NULL, null=True)
-	thoigian = models.DateTimeField()
-	noinhan = models.ForeignKey("setmeup.NoiNhan", on_delete=models.SET_NULL, null=True)
+	nguoi_duyet = models.ForeignKey(
+		"user.User", on_delete=models.SET_NULL, null=True, related_name="nguoi_duyet")
+	nguoi_ky = models.ForeignKey(
+		"user.User", on_delete=models.SET_NULL, null=True, related_name="nguoi_ky")
+	nguoi_soan = models.ForeignKey(
+		"user.User", on_delete=models.SET_NULL, null=True, related_name="nguoi_soan")
+	phongban = models.ForeignKey(
+		"setmeup.PhongBan", on_delete=models.SET_NULL, null=True)
+	noinhan = models.ForeignKey(
+		"setmeup.NoiNhan", on_delete=models.SET_NULL, null=True)
 	note = models.TextField()
-	created_by = models.ForeignKey("user.User", on_delete=models.SET_NULL, null=True)
+	thoigian = models.DateTimeField()
+	created_by = models.ForeignKey(
+		"user.User", on_delete=models.SET_NULL, null=True)
 
 	class Meta:
 		ordering = ["-pk"]

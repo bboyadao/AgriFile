@@ -31,7 +31,7 @@ cac:
 	python manage.py createcachetable
 
 su:
-	echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@gmail.com', 'admin123')" | python manage.py shell
+	echo "from django.contrib.auth import get_user_model;from set; from setmeup.models import LichBaoCao, NoiNhan, PhongBan, Title; User = get_user_model();User.objects.create_superuser(User.objects.create_superuser(username='admin', password='admin123', phongban=PhongBan.objects.last(), title=Title.objects.last()))" | python manage.py shell
 
 mock:
 	python manage.py mock_alias
