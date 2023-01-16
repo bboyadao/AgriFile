@@ -1,18 +1,17 @@
 {% extends 'adminlte/base.html' %}
 {% load crispy_forms_tags %}
-
+{% block page_actions %}
+    Tạo User
+{% endblock %}
 {% block content %}
 <div class="card card-primary card-outline">
-  <div class="card-header">
-    <h3 class="card-title">Tạo User</h3>
-  </div>
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
         {{ form | crispy }}
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-block bg-gradient-info float-right">Tạo</button>
+      <button type="submit" class="btn btn-block bg-gradient-primary float-right">Tạo</button>
     </div>
     <!-- /.card-footer -->
   </form>

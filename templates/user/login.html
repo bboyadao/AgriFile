@@ -2,7 +2,9 @@
 {% load i18n static %}
 
 {% block body_class %}login-page{% endblock %}
+{% if request.user.is_authenticated %}
 
+{% endif %}
 {% block body %}
     <div class="login-box">
         {% block logo %}

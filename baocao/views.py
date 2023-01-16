@@ -7,21 +7,39 @@ from django.views.generic import FormView, DetailView, ListView, DeleteView, Upd
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import BaseUpdateView
 
-from baocao.forms import BaoCaoForm
+from baocao.forms import BaoCaoForm, BaoCaoQuickForm
 from baocao.models import MediaFile, BaoCao
+from setmeup.models import LichBaoCao
+
+
 # from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-class BaoCaoDetail(DetailView):
+class BaoCaoDetail(LoginRequiredMixin, DetailView):
     model = BaoCao
     template_name = 'baocao/detail.html'
 
 
-class BaoCaoCreate(LoginRequiredMixin, FormView):
+class BaoCaoCreateByNof(LoginRequiredMixin, FormView):
 
     form_class = BaoCaoForm
-    template_name = 'baocao/create.html'
+    template_name = 'baocao/create_by_nof.html'
     pk = None
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        nof = self.request.GET.get("nof", None)
+        if nof:
+            nof = LichBaoCao.objects.get(pk=nof)
+            kwargs["nof"] = nof
+        return kwargs
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        nof = self.get_form_kwargs()
+        if self.request.method == "get":
+            context["nof"] = nof["nof"]
+        return context
 
     def get_success_url(self):
         return reverse('baocao_detail', kwargs={'pk': self.pk})
@@ -43,7 +61,41 @@ class BaoCaoCreate(LoginRequiredMixin, FormView):
             baocao.save()
             a = []
             for f in files:
-                print(f.__dict__)
+                a.append(MediaFile(baocao=baocao,
+                                   media=f,
+                                   filename=f._name,
+                                   filetype=f.content_type))
+            MediaFile.objects.bulk_create(a)
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class BaoCaoQuickCreate(LoginRequiredMixin, FormView):
+
+    form_class = BaoCaoQuickForm
+    template_name = 'baocao/quick_create.html'
+    pk = None
+
+    def get_success_url(self):
+        return reverse('baocao_detail', kwargs={'pk': self.pk})
+
+    def form_valid(self, form):
+        item = form.save()
+        self.pk = item.pk
+        messages.success(self.request, f"Tạo báo cáo thành công.")
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file_field')
+        if form.is_valid():
+            baocao = form.save(commit=False)
+            baocao.created_by = request.user
+            baocao.save()
+            a = []
+            for f in files:
                 a.append(MediaFile(baocao=baocao,
                                    media=f,
                                    filename=f._name,
@@ -66,7 +118,7 @@ class BaoCaoList(LoginRequiredMixin, ListView):
         return qs
 
 
-class BaoCaoUpdate(UpdateView):
+class BaoCaoUpdate(LoginRequiredMixin, UpdateView):
     model = BaoCao
     form_class = BaoCaoForm
     template_name = 'baocao/update.html'
@@ -79,11 +131,11 @@ class BaoCaoUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class BaoCaoDelete(DeleteView):
+class BaoCaoDelete(LoginRequiredMixin, DeleteView):
     pass
 
 
-class AddNote(BaseUpdateView):
+class AddNote(LoginRequiredMixin, BaseUpdateView):
     form_class = BaoCaoForm
     template_name = 'baocao/detail.html'
     model = BaoCao

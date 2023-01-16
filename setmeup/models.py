@@ -43,15 +43,26 @@ class LichBaoCao(models.Model):
 
     name = models.CharField(max_length=255)
     duedate = models.DateTimeField(null=True)
+    phongban = models.ForeignKey("setmeup.PhongBan", on_delete=models.CASCADE)
     noidung = models.TextField(null=True)
     kind = models.SmallIntegerField(choices=Loai.choices)
     dinhky = models.SmallIntegerField(blank=True, null=True, choices=DinhKy.choices)
+    created_by = models.ForeignKey("user.User", on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-pk"]
 
     def __str__(self):
         return self.name.__str__()
+
+    @property
+    def get_full_title(self):
+        title = f"{self.name}_____{self.get_kind_display()}"
+        if self.kind == self.Loai.dinhky:
+            title += f"_____{self.get_dinhky_display()}"
+        title += f"_____{self.phongban.name}"
+        return title
 
     @property
     def get_class_hell(self):

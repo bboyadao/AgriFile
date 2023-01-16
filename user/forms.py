@@ -50,7 +50,7 @@ class UserUpdateForm(ModelForm):
 
 	class Meta:
 		model = User
-		fields = ["username", "full_name", "phongban"]
+		fields = ["username", "full_name","title", "phongban"]
 		error_messages = {
 			NON_FIELD_ERRORS: {
 				'unique_together': "%(model_name)s's %(field_labels)s are not unique.",

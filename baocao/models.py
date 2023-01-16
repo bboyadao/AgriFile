@@ -9,6 +9,7 @@ from django.utils import timezone
 class BaoCao(models.Model):
 	name = models.CharField(max_length=255)
 	noidung = models.TextField()
+	# lich = models.ForeignKey("setmeup.LichBaoCao", on_delete=models.CASCADE)
 	nguoi_duyet = models.ForeignKey(
 		"user.User", on_delete=models.SET_NULL, null=True, related_name="nguoi_duyet")
 	nguoi_ky = models.ForeignKey(
@@ -23,6 +24,8 @@ class BaoCao(models.Model):
 	thoigian = models.DateTimeField()
 	created_by = models.ForeignKey(
 		"user.User", on_delete=models.PROTECT)
+
+	nof = models.ForeignKey("setmeup.LichBaoCao", on_delete=models.SET_NULL, null=True)
 
 	class Meta:
 		ordering = ["-pk"]

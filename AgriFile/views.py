@@ -3,8 +3,10 @@ import datetime
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordContextMixin, LogoutView
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
@@ -15,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 from setmeup.models import LichBaoCao
 
 
-class ChangePass(PasswordContextMixin, FormView):
+class ChangePass(LoginRequiredMixin, PasswordContextMixin, FormView):
 	form_class = PasswordChangeForm
 	success_url = reverse_lazy("password_change_done")
 	template_name = "user/change_pass.html"
@@ -40,7 +42,7 @@ class ChangePass(PasswordContextMixin, FormView):
 		return super().form_valid(form)
 
 
-class PasswordChangeDoneView(PasswordContextMixin, TemplateView):
+class PasswordChangeDoneView(LoginRequiredMixin, PasswordContextMixin, TemplateView):
 	template_name = "user/password_change_done.html"
 	title = _("Password change successful")
 
@@ -118,7 +120,7 @@ data = [
 				"icon": "fa fa-clipboard",
 				"navs": [
 					{"name": "Danh Sách Đã Nộp", "icon": "fa fa-list-ol", "link": "baocao_list"},
-					{"name": "Tạo Mới", "icon": "fa fa-plus", "link": "baocao_create"},
+					{"name": "Tạo Mới", "icon": "fa fa-plus", "link": "baocao_quick_create"},
 
 				]
 			},

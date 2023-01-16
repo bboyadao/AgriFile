@@ -1,4 +1,4 @@
-from setmeup.models import PhongBan, Title
+from setmeup.models import PhongBan, Title, NoiNhan
 from user.models import User
 import secrets
 import string
@@ -52,7 +52,7 @@ a = (("Phan Thị Thanh Hà", "Giám Đốc", "Ban Giám đốc"),
 ("Nguyễn Diệu Linh", "Cán bộ", "Quản lý rủi ro"),
 ("Nguyễn Thị Thùy Trang", "Cán bộ", "Quản lý rủi ro"),
 ("Lê Mỹ Hạnh", "Cán bộ", "Quản lý rủi ro"),
-("Nguyễn Quý Hợi", "Phó phụ trách", "Nghiên cứu và Phát triển"),
+("Nguyễn Quý Hợi", "Trưởng phòng", "Nghiên cứu và Phát triển"),
 ("Nguyễn Thị Mai Yên", "Phó phòng", "Nghiên cứu và Phát triển"),
 ("Trần Hồng Nhung", "Phó phòng", "Nghiên cứu và Phát triển"),
 ("Nguyễn Lan Anh", "Cán bộ", "Nghiên cứu và Phát triển"),
@@ -150,3 +150,51 @@ User.objects.create_superuser(
 	password="admin123",
 	phongban=PhongBan.objects.last(),
 	title=Title.objects.last())
+
+a = ("ĐẢNG ỦY,"
+"HỘI ĐỒNG THÀNH VIÊN",
+"BAN ĐIỀU HÀNH",
+"BAN KIỂM SOÁT",
+"BAN THƯ KÝ HỘI ĐỒNG THÀNH VIÊN",
+"PHÒNG TỔNG HỢP",
+"ỦY BAN NHÂN SỰ VÀ TỔ CHỨC ĐẢNG",
+"BAN KẾ HOẠCH NGUỒN VỐN",
+"BAN KIỂM TRA NỘI BỘ",
+"BAN TÀI CHÍNH KẾ TOÁN",
+"BAN TỔ CHỨC LAO ĐỘNG VÀ TIỀN LƯƠNG",
+"ỦY BAN ĐẦU TƯ",
+"BAN CỔ PHẦN HÓA",
+"BAN ĐẦU TƯ",
+"ỦY BAN CHÍNH SÁCH",
+"BAN NGHIÊN CỨU PHÁT TRIỂN SẢN PHẨM DỊCH VỤ",
+"BAN PHÁP CHẾ VÀ KIỂM SOÁT TUÂN THỦ",
+"ỦY BAN QUẢN LÝ RỦI RO",
+"VĂN PHÒNG TRỤ SỞ CHÍNH",
+"BAN ĐỊNH CHẾ TÀI CHÍNH",
+"BAN KHÁCH HÀNG HỘ SẢN XUẤT VÀ CÁ NHÂN",
+"BAN KHÁCH HÀNG LỚN",
+"BAN QUẢN LÝ TÀI SẢN PHÚC LỢI",
+"BAN QUẢN LÝ ĐẦU TƯ NỘI NGÀNH",
+"BAN QUẢN LÝ DỰ ÁN ĐẦU TƯ XÂY DỰNG KHU VỰC",
+"BAN TIỀN TỆ - KHO QUỸ",
+"VĂN PHÒNG ĐOÀN THANH NIÊN",
+"BAN TÍN DỤNG",
+"BAN THI ĐUA KHEN THƯỞNG",
+"BAN TRUYỀN THÔNG",
+"CƠ QUAN CÔNG ĐOÀN AGRIBANK",
+"TRUNG TÂM CHĂM SÓC, HỖ TRỢ KHÁCH HÀNG",
+"TRUNG TÂM DỊCH VỤ THANH TOÁN VÀ KIỀU HỐI",
+"TRUNG TÂM LƯU TRỮ",
+"TRUNG TÂM QUẢN LÝ RỦI RO",
+"TRUNG TÂM THANH TOÁN",
+"TRUNG TÂM VỐN",
+"TRUNG TÂM CÔNG NGHỆ THÔNG TIN",
+"TRUNG TÂM THẺ",
+"TRƯỜNG ĐÀO TẠO CÁN BỘ AGRIBANK")
+
+aa = []
+for i in a:
+	n= NoiNhan(name=i.capitalize())
+	aa.append(n)
+
+NoiNhan.objects.bulk_create(aa)

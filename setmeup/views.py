@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.views import PasswordContextMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
@@ -40,7 +40,7 @@ class ListUser(PermissionRequiredMixin, ListView):
         return qs
 
 
-class CreateUser(CreateView):
+class CreateUser(LoginRequiredMixin, CreateView):
     model = User
     template_name = "user/user_create.html"
     queryset = User.objects.all()
@@ -63,12 +63,12 @@ class CreateUser(CreateView):
             return self.form_invalid(form)
 
 
-class DetailUser(DetailView):
+class DetailUser(LoginRequiredMixin, DetailView):
     template_name = "user/user_detail.html"
     model = User
 
 
-class ResetPass(UpdateView):
+class ResetPass(LoginRequiredMixin, UpdateView):
     template_name = "user/user_list.html"
     model = User
     fields = []
@@ -85,7 +85,7 @@ class ResetPass(UpdateView):
         return HttpResponseRedirect(reverse_lazy("user_list"))
 
 
-class UpdateUser(UpdateView):
+class UpdateUser(LoginRequiredMixin, UpdateView):
     template_name = "user/user_update.html"
     model = User
     form_class = UserUpdateForm
@@ -96,7 +96,7 @@ class UpdateUser(UpdateView):
         return super().form_valid(form)
 
 
-class ChangePassUser(PasswordContextMixin, FormView):
+class ChangePassUser(LoginRequiredMixin, PasswordContextMixin, FormView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy("password_change_done")
     template_name = "user/change_pass.html"
@@ -121,7 +121,7 @@ class ChangePassUser(PasswordContextMixin, FormView):
         return super().form_valid(form)
 
 
-class DeleteUser(DeleteView):
+class DeleteUser(LoginRequiredMixin, DeleteView):
     template_name = "user/user_confirm_delete.html"
     model = User
     success_url = reverse_lazy("user_list")
@@ -131,7 +131,7 @@ class DeleteUser(DeleteView):
         return super().form_valid(form)
 
 
-class NoiNhanList(ListView):
+class NoiNhanList(LoginRequiredMixin, ListView):
     template_name = "noinhan/list.html"
     queryset = NoiNhan.objects.all()
     model = NoiNhan
@@ -145,18 +145,18 @@ class NoiNhanList(ListView):
         return qs
 
 
-class NoiNhanDetail(DetailView):
+class NoiNhanDetail(LoginRequiredMixin, DetailView):
     model = NoiNhan
 
 
-class NoiNhanCreate(CreateView):
+class NoiNhanCreate(LoginRequiredMixin, CreateView):
     template_name = "noinhan/create.html"
     queryset = NoiNhan.objects.all()
     fields = ["name"]
     success_url = reverse_lazy("noinhan_list")
 
 
-class NoiNhanUpdate(UpdateView):
+class NoiNhanUpdate(LoginRequiredMixin, UpdateView):
     template_name = "noinhan/update.html"
     model = NoiNhan
     fields = ["name"]
@@ -167,7 +167,7 @@ class NoiNhanUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class NoiNhanDelete(DeleteView):
+class NoiNhanDelete(LoginRequiredMixin, DeleteView):
     model = NoiNhan
     success_url = reverse_lazy('noinhan_list')
     template_name = 'noinhan/delete.html'
@@ -177,7 +177,7 @@ class NoiNhanDelete(DeleteView):
         return super().form_valid(form)
 
 
-class PhongBanList(ListView):
+class PhongBanList(LoginRequiredMixin, ListView):
     template_name = "phongban/list.html"
     queryset = PhongBan.objects.all()
     model = PhongBan
@@ -191,18 +191,18 @@ class PhongBanList(ListView):
         return qs
 
 
-class PhongBanDetail(DetailView):
+class PhongBanDetail(LoginRequiredMixin, DetailView):
     model = PhongBan
 
 
-class PhongBanCreate(CreateView):
+class PhongBanCreate(LoginRequiredMixin, CreateView):
     template_name = "phongban/create.html"
     queryset = PhongBan.objects.all()
     fields = ["name"]
     success_url = reverse_lazy("phongban_list")
 
 
-class PhongBanUpdate(UpdateView):
+class PhongBanUpdate(LoginRequiredMixin, UpdateView):
     template_name = "phongban/update.html"
     model = PhongBan
     fields = ["name"]
@@ -213,7 +213,7 @@ class PhongBanUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class PhongBanDelete(DeleteView):
+class PhongBanDelete(LoginRequiredMixin, DeleteView):
     model = PhongBan
     success_url = reverse_lazy('phongban_list')
     template_name = 'phongban/delete.html'
@@ -223,7 +223,7 @@ class PhongBanDelete(DeleteView):
         return super().form_valid(form)
 
 
-class LichBaoCaoList(ListView):
+class LichBaoCaoList(LoginRequiredMixin, ListView):
     template_name = "lichbaocao/list.html"
     queryset = LichBaoCao.objects.all()
     model = LichBaoCao
@@ -237,18 +237,22 @@ class LichBaoCaoList(ListView):
         return qs
 
 
-class LichBaoCaoDetail(DetailView):
+class LichBaoCaoDetail(LoginRequiredMixin, DetailView):
     model = LichBaoCao
 
 
-class LichBaoCaoCreate(CreateView):
+class LichBaoCaoCreate(LoginRequiredMixin, CreateView):
     template_name = "lichbaocao/create.html"
     queryset = LichBaoCao.objects.all()
     success_url = reverse_lazy("lichbaocao_list")
     form_class = LichBaoCaoForm
 
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
-class LichBaoCaoUpdate(UpdateView):
+
+class LichBaoCaoUpdate(LoginRequiredMixin, UpdateView):
     template_name = "lichbaocao/update.html"
     model = LichBaoCao
     success_url = reverse_lazy("lichbaocao_list")
@@ -260,7 +264,7 @@ class LichBaoCaoUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class LichBaoCaoDelete(DeleteView):
+class LichBaoCaoDelete(LoginRequiredMixin, DeleteView):
     model = LichBaoCao
     success_url = reverse_lazy('lichbaocao_list')
     template_name = 'lichbaocao/delete.html'
@@ -270,7 +274,7 @@ class LichBaoCaoDelete(DeleteView):
         return super().form_valid(form)
 
 
-class AdminBaoCao(FilterView):
+class AdminBaoCao(LoginRequiredMixin, FilterView):
     model = BaoCao
     template_name = "baocao/admin_baocao_list.html"
     filterset_class = BaoCaoFilterset

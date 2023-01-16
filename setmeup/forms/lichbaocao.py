@@ -22,7 +22,7 @@ class LichBaoCaoForm(ModelForm):
 
 	class Meta:
 		model = LichBaoCao
-		fields = ["kind", "dinhky", "name", "duedate", "noidung", ]
+		fields = ["kind", "dinhky", "name", "phongban", "duedate", "noidung", ]
 		widgets = {
 			'name': forms.TextInput(),
 			'dinhky': forms.Select(choices=LichBaoCao.DinhKy.choices)
@@ -33,7 +33,8 @@ class LichBaoCaoForm(ModelForm):
 			"duedate": "Hạn nộp",
 			"noidung": "Nội dung",
 			"kind": "Loại",
-			"dinhky": "Định kỳ"
+			"dinhky": "Định kỳ",
+			"phongban": "Phòng ban"
 		}
 
 	def clean(self):

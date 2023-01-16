@@ -3,7 +3,6 @@
 {% block page_actions %}
 Danh sách người dùng
 {% endblock %}
-
 {% block content %}
     <div class="row">
         <div class="col-12">
@@ -51,6 +50,7 @@ Danh sách người dùng
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th>Tên</th>
+                                <th>Chức danh</th>
                                 <th>Phòng ban</th>
                                 <th>Last login</th>
                                 <th>Action</th>
@@ -71,6 +71,7 @@ Danh sách người dùng
                                     {% endif %}
 
                                     <td>{{ user.full_name }}</td>
+                                    <td>{{ user.title.name }}</td>
                                     <td><span class="tag tag-success">{{ user.phongban.name }}</span></td>
                                     <td>{% if user.last_login %}
                                     {{ user.last_login }}

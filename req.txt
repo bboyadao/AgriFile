@@ -34,7 +34,7 @@
             Theo Quý.
             Theo Năm.
             =>  bao nhiêu báo cáo , {name, phòng ban, nơi nhận, thời gian.}
-
+            => xuat file.
 
 - Lên lịch báo cho tháng của các usẻrr trong phòng ban.
     + Hiện thông báo nộp theo lịch gần nhất.
@@ -42,12 +42,20 @@
 
 - Notif: Theo lịch.
 ############
+
 Nơi nhận ?
-title ?
+title ? None
+
+
+
+bao cao -> thoi gian Done
+
+notif count? Done
+-------
+thong ke realtime ?.
+
 lich bao cao => done
-bao cao dua tren lich ?
-bao cao -> thoi gian
+    them: Phòng
 
-notif count?
-
-thong ke realtime ?
+bao cao dua tren lich ? link to lichbaocao
+#########################

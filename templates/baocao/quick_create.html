@@ -1,9 +1,8 @@
 {% extends 'adminlte/base.html' %}
 {% load static i18n crispy_forms_tags %}
 
-
 {% block page_actions %}
-    Tạo Báo Cáo
+    Tạo Báo Cáo Nhanh
 {% endblock %}
 {% block content %}
     <div class="card card-primary card-outline">
@@ -11,33 +10,28 @@
             <div class="card-body">
                 {% for field in form %}
                     <div class="form-group row">
-                        <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+                        <label for="{{ field.id_for_label }}"
+                               class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
                         <div class="col-sm-10">
-
-
                             {{ field }}
-{{ field.errors }}
+                            {{ field.errors }}
                             {% if field.help_text %}
                                 <p class="help">{{ field.help_text|safe }}</p>
-
                             {% endif %}
-
-
-
                         </div>
                     </div>
                     {% if field.name == "file_field" %}
                     {% endif %}
                 {% endfor %}
-            <div class="form-group row" id="files-area">
+                <div class="form-group row" id="files-area">
                     <span id="filesList">
                     <span id="files-names"></span>
                     </span>
-                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-block bg-gradient-info float-right">Tạo</button>
+                <button type="submit" class="btn btn-block bg-primary float-right">Tạo</button>
             </div>
 
             <!-- /.card-footer -->
@@ -55,6 +49,7 @@
             margin: 5px;
             color: initial;
             display: inline-flex;
+
         &
         > span.name {
             padding-right: 2px;
@@ -88,8 +83,8 @@
 
     </style>
 
-{% include "adminlte/datetimepicker.html" %}
-<script>
-    mondatetimepicker("#id_thoigian")
-</script>
+    {% include "adminlte/datetimepicker.html" %}
+    <script>
+        mondatetimepicker("#id_thoigian")
+    </script>
 {% endblock %}

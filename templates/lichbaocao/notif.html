@@ -17,14 +17,9 @@
                     {% for nof in lichbaocao_list %}
 
                         <div class="callout bg-{{ nof.get_class_hell }} {{ nof.get_class_by_time }}">
-                            <h5>{{ nof.name }} (
-                                <td class="text-{{ nof.get_class_hell }}">
-                                        {{ nof.get_kind_display }}
-                                        {% if nof.kind == nof.Loai.dinhky %}
-                                            - {{ nof.get_dinhky_display }}
-                                        {% endif %}
-                                    </td>
-                                )</h5>
+                            <h5>
+                                {{ nof.get_full_title }}
+                            </h5>
                             {% if nof.get_delta_days == 0 or nof.get_delta_days == -1 %}
                                 <b>Hoàn thành trong hôm nay: </b>
                             {% else %}
@@ -35,6 +30,7 @@
                         {% if nof.noidung %}
                             <pre>{{ nof.noidung }}</pre>
                         {% endif %}
+                        <a href="{% url 'baocao_create_by_nof' %}?nof={{ nof.pk }}">Click để tạo.</a>
                         </div>
                     {% endfor %}
             </div>
