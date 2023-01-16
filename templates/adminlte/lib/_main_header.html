@@ -22,7 +22,12 @@
                     <li class="nav-item dropdown">
                         <a href="{% url 'notif' %}" class="nav-link">
                             <i class="fas fa-bullhorn"></i>
-                            <span class="badge badge-danger navbar-badge">{{ num_of_nof }}</span>
+                            {% if num_of_nof > 0 %}
+                            <span class="badge badge-danger navbar-badge">
+                                {{ num_of_nof }}
+                            </span>
+                            {% endif %}
+
                         </a>
 
                     </li>
@@ -41,28 +46,21 @@
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                         <a href="#" class="dropdown-item">
                                             <!-- Message Start -->
-
                                             <div class="media">
                                                 <span class="float-right text-sm text-danger"><i
                                                         class="fas fa-online"></i></span>
                                                 <div class="media-body">
-
                                                     <h3 class="dropdown-item-title" id="me" onclick="toMe()">
-
                                                         {% firstof request.user.get_short_name request.user.get_username %}
-
-
                                                         <span class="float-right text-sm text-danger"><i
                                                                 class="fas fa-online"></i></span>
-
-
                                                         <p class="text-sm"><small>{% trans 'Member since' %} :</small>
                                                         </p>
                                                         <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
                                                             <small>{{ request.user.date_joined }}</small></p>
+                                                 </h3>
                                                 </div>
                                             </div>
-
                                             <!-- Message End -->
                                         </a>
                                         <div class="dropdown-divider"></div>

@@ -3,6 +3,13 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+class Title(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name.__str__()
+
+
 class PhongBan(models.Model):
     name = models.CharField(max_length=1024)
 

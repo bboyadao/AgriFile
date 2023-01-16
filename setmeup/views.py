@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordContextMixin
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
@@ -66,13 +66,11 @@ class CreateUser(CreateView):
 class DetailUser(DetailView):
     template_name = "user/user_detail.html"
     model = User
-    slug_field = "username"
 
 
 class ResetPass(UpdateView):
     template_name = "user/user_list.html"
     model = User
-    slug_field = "username"
     fields = []
 
     def get(self, request, *args, **kwargs):
@@ -90,8 +88,8 @@ class ResetPass(UpdateView):
 class UpdateUser(UpdateView):
     template_name = "user/user_update.html"
     model = User
-    slug_field = "username"
     form_class = UserUpdateForm
+    success_url = reverse_lazy("user_list")
 
     def form_valid(self, form):
         messages.success(self.request, "Cập nhật thông tin thành công.")
@@ -126,7 +124,6 @@ class ChangePassUser(PasswordContextMixin, FormView):
 class DeleteUser(DeleteView):
     template_name = "user/user_confirm_delete.html"
     model = User
-    slug_field = "username"
     success_url = reverse_lazy("user_list")
 
     def form_valid(self, form):
@@ -294,3 +291,5 @@ class NoTif(ListView):
             )
         )
         return qs
+
+

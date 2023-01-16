@@ -8,12 +8,12 @@ from setmeup.views import ListUser, CreateUser, DetailUser, UpdateUser, ChangePa
 urlpatterns = [
 	path('user/', ListUser.as_view(), name="user_list"),
 	path('user/create/', CreateUser.as_view(), name="user_create"),
-	path('user/<str:slug>/', DetailUser.as_view(), name="user_detail"),
-	path('user/<slug:slug>/update/', UpdateUser.as_view(), name="user_update"),
-	path('user/<slug:slug>/set_pass/', ChangePassUser.as_view(), name="admin_set_user_pass"),
-	path('user/<slug:slug>/change_pass/', ChangePassUser.as_view(), name="user_change_pass"),
-	path('user/<slug:slug>/delete/', DeleteUser.as_view(), name="user_delete"),
-	path('reset_pass/<slug:slug>/', ResetPass.as_view(), name="reset_pass"),
+	path('user/<pk>/', DetailUser.as_view(), name="user_detail"),
+	path('user/<pk>/update/', UpdateUser.as_view(), name="user_update"),
+	path('user/<pk>/set_pass/', ChangePassUser.as_view(), name="admin_set_user_pass"),
+	path('user/<pk>/change_pass/', ChangePassUser.as_view(), name="user_change_pass"),
+	path('user/<pk>/delete/', DeleteUser.as_view(), name="user_delete"),
+	path('reset_pass/<pk>/', ResetPass.as_view(), name="reset_pass"),
 
 
 	# noi nhan

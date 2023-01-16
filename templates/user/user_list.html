@@ -63,31 +63,36 @@ Danh sách người dùng
                                 <tr>
 
                                     <td>{{ user.pk }}</td>
-                                    <td>{{ user.username }}</td>
+
+                                    {% if user.get_my_user_name %}
+                                        <td>{{ user.username }}</td>
+                                    {% else %}
+                                        <td>Chưa có</td>
+                                    {% endif %}
+
                                     <td>{{ user.full_name }}</td>
                                     <td><span class="tag tag-success">{{ user.phongban.name }}</span></td>
-                                    <td>{{ user.last_login }}</td>
+                                    <td>{% if user.last_login %}
+                                    {{ user.last_login }}
+                                    {% endif %} </td>
                                     <td>
                                         <a href="{{ user.get_absolute_url }}">
                                             <button type="button" class="btn btn-group-sm btn-info btn-sm">
-
                                                 Detail
-
-
                                             </button>
                                         </a>
-                                        <a href="{% url 'user_update' user.username %}">
+                                        <a href="{% url 'user_update' user.pk %}">
                                             <button type="button" class="btn btn-group-sm btn-success btn-sm">
 
                                                 Update
                                             </button>
                                         </a>
-                                        <a href="{% url 'reset_pass' user.username %}">
+                                        <a href="{% url 'reset_pass' user.pk %}">
                                             <button type="button" class="btn btn-group-sm btn-warning btn-sm">Reset
                                                 pass
                                             </button>
                                         </a>
-                                        <a href="{% url 'user_delete' user.username %}">
+                                        <a href="{% url 'user_delete' user.pk %}">
                                             <button type="button" class="btn btn-group-sm btn-danger btn-sm">Delete
                                             </button>
                                         </a>

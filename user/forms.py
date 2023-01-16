@@ -1,15 +1,10 @@
-import sys
-
-import django
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 from django import forms
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.forms import ModelForm, NumberInput
-from django.utils.functional import lazy
 
 from user.models import User
-from setmeup.models import PhongBan
 
 
 class UserForm(ModelForm):
@@ -25,8 +20,6 @@ class UserForm(ModelForm):
 			Field('username', "phongban"),
 		)
 
-	phongban = forms.ModelChoiceField(queryset=None, widget=forms.Select)
-
 	class Meta:
 		model = User
 		fields = ["username", "full_name", "phongban"]
@@ -38,8 +31,6 @@ class UserForm(ModelForm):
 
 		widgets = {
 			'username': NumberInput(),
-			# 'phongban':  forms.Select(choices=PhongBan.objects.all())
-			# 'phongban':  forms.Select()
 		}
 		labels = {
 			'username': "Số điện thoại",
@@ -52,11 +43,13 @@ class UserForm(ModelForm):
 
 
 class UserUpdateForm(ModelForm):
-	phongban = forms.ModelChoiceField(queryset=None, widget=forms.Select)
+	username = forms.NumberInput()
+
+
 
 	class Meta:
 		model = User
-		fields = ["full_name", "phongban"]
+		fields = ["username", "full_name", "phongban"]
 		error_messages = {
 			NON_FIELD_ERRORS: {
 				'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
@@ -65,8 +58,6 @@ class UserUpdateForm(ModelForm):
 
 		widgets = {
 			'username': NumberInput(),
-			# 'phongban':  forms.Select(choices=PhongBan.objects.all())
-			# 'phongban': forms.Select()
 		}
 		labels = {
 			'username': "Số điện thoại",
@@ -76,3 +67,8 @@ class UserUpdateForm(ModelForm):
 		help_texts = {
 			'username': 'Sđt (09xxx)',
 		}
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+		self.helper.form_method = 'POST'

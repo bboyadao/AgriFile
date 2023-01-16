@@ -18,7 +18,7 @@ sh:
 	python manage.py shell_plus
 
 cl:
-	rm -rf ./storage
+	rm -rf ./storage/*
 	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 	find . -path "*/migrations/*.pyc"  -delete
 mk:
