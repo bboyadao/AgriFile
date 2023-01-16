@@ -12,11 +12,6 @@ from user.models import User
 from setmeup.models import PhongBan
 
 
-class _UserForm(ModelForm):
-	model = User
-	fields = ["username", "full_name", "phongban"]
-
-
 class UserForm(ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -30,6 +25,8 @@ class UserForm(ModelForm):
 			Field('username', "phongban"),
 		)
 
+	phongban = forms.ModelChoiceField(queryset=None, widget=forms.Select)
+
 	class Meta:
 		model = User
 		fields = ["username", "full_name", "phongban"]
@@ -41,7 +38,7 @@ class UserForm(ModelForm):
 
 		widgets = {
 			'username': NumberInput(),
-			'phongban':  forms.Select(choices=PhongBan.objects.all())
+			# 'phongban':  forms.Select(choices=PhongBan.objects.all())
 			# 'phongban':  forms.Select()
 		}
 		labels = {
@@ -55,6 +52,7 @@ class UserForm(ModelForm):
 
 
 class UserUpdateForm(ModelForm):
+	phongban = forms.ModelChoiceField(queryset=None, widget=forms.Select)
 
 	class Meta:
 		model = User
@@ -67,7 +65,7 @@ class UserUpdateForm(ModelForm):
 
 		widgets = {
 			'username': NumberInput(),
-			'phongban':  forms.Select(choices=PhongBan.objects.all())
+			# 'phongban':  forms.Select(choices=PhongBan.objects.all())
 			# 'phongban': forms.Select()
 		}
 		labels = {
@@ -78,16 +76,3 @@ class UserUpdateForm(ModelForm):
 		help_texts = {
 			'username': 'Sđt (09xxx)',
 		}
-
-
-class _UserUpdateForm(ModelForm):
-	class Meta:
-		model = User
-		fields = ["full_name", "phongban"]
-
-if 'makemigrations' not in sys.argv and 'migrate' not in sys.argv:
-	UserUpdateForm = UserUpdateForm
-	UserForm = UserForm
-else:
-	UserUpdateForm = _UserUpdateForm
-	UserForm = _UserForm

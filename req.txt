@@ -19,6 +19,7 @@
     2. files.
     3. người duyệt.
     3. người ký.
+    x. nguoi soan
     4. Phòng ban. (tự nhập )
     5. thời gian.
     6. Nơi nhận.

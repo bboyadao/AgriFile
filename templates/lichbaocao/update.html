@@ -1,19 +1,22 @@
 {% extends 'adminlte/base.html' %}
 {% load crispy_forms_filters %}
 {% load static i18n crispy_forms_tags %}
-{%  block page_actions %}
-  Sửa Lịch Báo Cáo
-{% endblock %} %}
+{% block page_actions %}
+Sửa Lịch Báo Cáo
+
+{% endblock %}
 {% block content %}
-<div class="card card-success card-outline">
+<div class="card card-{{ object.get_class_hell }} card-outline" id="lichbaocao">
 
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
     <div class="card-body">
         {{ form | crispy }}
+
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-block bg-gradient-info float-right">Sửa</button>
+      <button id="lichbaocao_btn"
+              type="submit" class="btn btn-block float-right btn-{{ object.get_class_hell }}">Sửa</button>
     </div>
     <!-- /.card-footer -->
   </form>
@@ -24,4 +27,5 @@
 <script>
 mondatetimepicker("#id_duedate")
 </script>
+<script src="{% static 'js/lichbaocao.js' %}"></script>
 {% endblock %}

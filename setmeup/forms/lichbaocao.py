@@ -1,10 +1,8 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
 from django import forms
-from django.core.exceptions import NON_FIELD_ERRORS
-from django.forms import Form, ModelForm, DateField, widgets, SplitDateTimeWidget
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm
+
 from setmeup.models import LichBaoCao
-from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 
 
 class DateTimePickerInput(forms.DateTimeInput):
@@ -22,27 +20,34 @@ class LichBaoCaoForm(ModelForm):
 			}
 		))
 
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		self.helper = FormHelper()
-		self.helper.form_id = 'id-creat_user'
-		self.helper.form_class = 'form-horizontal'
-		self.helper.form_method = 'post'
-		self.helper.form_action = 'lichbaocao_create'
-		self.helper.add_input(Submit('submit', 'Tạo'))
-		self.helper.layout = Layout(
-			Field('name', "duedate"),
-		)
-
 	class Meta:
 		model = LichBaoCao
-		fields = ["name", "duedate", "noidung"]
+		fields = ["kind", "dinhky", "name", "duedate", "noidung", ]
 		widgets = {
 			'name': forms.TextInput(),
+			'dinhky': forms.Select(choices=LichBaoCao.DinhKy.choices)
 		}
 
 		labels = {
 			'name': "Tên",
 			"duedate": "Hạn nộp",
-			"noidung": "Nội dung"
+			"noidung": "Nội dung",
+			"kind": "Loại",
+			"dinhky": "Định kỳ"
 		}
+
+	def clean(self):
+		cleaned_data = super().clean()
+		kind = cleaned_data.get("kind", None)
+		dinhky = cleaned_data.get("dinhky", None)
+
+		if kind == LichBaoCao.Loai.dinhky and not dinhky:
+			raise ValidationError(
+				"Sai loại"
+			)
+
+		if all([kind, dinhky]):
+			if kind not in LichBaoCao.Loai.values or dinhky not in LichBaoCao.DinhKy.values:
+				raise ValidationError(
+					"lien he admin"
+				)

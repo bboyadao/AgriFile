@@ -1,0 +1,122 @@
+Phan Thị Thanh Hà|Giám Đốc|Ban Giám đốc
+Phạm Thị Thanh Yên|Phó Giám đốc|Ban Giám đốc
+Trịnh Ngọc Tú|Phó Giám đốc|Ban Giám đốc
+Nguyễn Thị Thu Thuỷ|Trưởng phòng|Phòng Tổng hợp
+Phan Duy Toàn|Phó phòng|Phòng Tổng hợp
+Trần Vân Thủy|Phó phòng|Phòng Tổng hợp
+Nguyễn Văn Khuê|Phó phòng|Phòng Tổng hợp
+Nguyễn Anh Tuyên|Cán bộ|Phòng Tổng hợp
+Bùi Thị Thúy Hà|Cán bộ|Phòng Tổng hợp
+Đặng Quang Hưng|Cán bộ|Phòng Tổng hợp
+Trần Thị Bích Ngọc|Cán bộ|Phòng Tổng hợp
+Phạm Đức Quý|Cán bộ|Phòng Tổng hợp
+Vũ Thị Tuyết Mai|Cán bộ|Phòng Tổng hợp
+Nguyễn Thị Hồng Liên|Trưởng phòng|Phòng Phát hành thẻ
+Bùi Đình Cương|Phó phòng|Phòng Phát hành thẻ
+Phạm Ngọc Thơ|Phó phòng|Phòng Phát hành thẻ
+Nguyễn Thị Mai Phương|Phó phòng|Phòng Phát hành thẻ
+Đinh Thị Thúy|Cán bộ|Phòng Phát hành thẻ
+Nguyễn Thị Tố Uyên|Cán bộ|Phòng Phát hành thẻ
+Nguyễn Thị Hương Lan|Cán bộ|Phòng Phát hành thẻ
+Đoàn Thị Thanh|Cán bộ|Phòng Phát hành thẻ
+Tô Lan Hương|Cán bộ|Phòng Phát hành thẻ
+Vũ Đức Trung|Cán bộ|Phòng Phát hành thẻ
+Hồ Thị Loan|Cán bộ|Phòng Phát hành thẻ
+Bùi Thị Mến|Trưởng phòng|Phòng Kế toán
+Nguyễn Bá Nhiệm|Phó phòng|Phòng Kế toán
+Đỗ Thị Thanh Thuỷ|Phó phòng|Phòng Kế toán
+Lê Thanh Loan|Phó phòng|Phòng Kế toán
+Nguyễn Thị Thanh Hương|Cán bộ|Phòng Kế toán
+Bùi Thị Hoài Thương|Cán bộ|Phòng Kế toán
+Lê Hương Giang|Cán bộ|Phòng Kế toán
+Hà Thị Ngân|Cán bộ|Phòng Kế toán
+Hoàng Việt Cường|Trưởng phòng|Phòng Quản lý rủi ro
+Nguyễn Xuân Hiếu|Phó phòng|Phòng Quản lý rủi ro
+Phạm Thị Thu Thủy|Phó phòng|Phòng Quản lý rủi ro
+Nguyễn Thị Phương Nga|Phó phòng|Phòng Quản lý rủi ro
+Vũ Hồng Ngọc|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Tùng Lâm|Cán bộ|Phòng Quản lý rủi ro
+Dương Thị Thùy Giang|Cán bộ|Phòng Quản lý rủi ro
+Trịnh Ngọc Minh|Cán bộ|Phòng Quản lý rủi ro
+Trịnh Thu Hương|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Thị Thùy Trang|Cán bộ|Phòng Quản lý rủi ro
+Ngô Thị Thu Hương|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Ngọc Thúy|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Hoài Phương|Cán bộ|Phòng Quản lý rủi ro
+Lương Minh Hiếu|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Diệu Linh|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Thị Thùy Trang|Cán bộ|Phòng Quản lý rủi ro
+Lê Mỹ Hạnh|Cán bộ|Phòng Quản lý rủi ro
+Nguyễn Quý Hợi|Phó phòng phụ trách|Phòng Nghiên cứu và Phát triển
+Nguyễn Thị Mai Yên|Phó phòng|Phòng Nghiên cứu và Phát triển
+Trần Hồng Nhung|Phó phòng|Phòng Nghiên cứu và Phát triển
+Nguyễn Lan Anh|Cán bộ|Phòng Nghiên cứu và Phát triển
+Nguyễn Thế Anh|Cán bộ|Phòng Nghiên cứu và Phát triển
+Đỗ Thị Tuyết Minh|Cán bộ|Phòng Nghiên cứu và Phát triển
+Nguyễn Tuấn Hân|Cán bộ|Phòng Nghiên cứu và Phát triển
+Nguyễn Thị Như Quỳnh|Cán bộ|Phòng Nghiên cứu và Phát triển
+Vũ Phương Thảo|Cán bộ|Phòng Nghiên cứu và Phát triển
+Tô Thùy Linh|Cán bộ|Phòng Nghiên cứu và Phát triển
+Nguyễn Ngọc Quỳnh|Cán bộ|Phòng Nghiên cứu và Phát triển
+Hoàng Thị Thu Hiền|Trưởng phòng|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Thị Quỳnh Trang|Phó phòng|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Thanh Tùng|Phó phòng|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Thị Thuý Loan|Phó phòng|Phòng Vận hành nghiệp vụ thẻ
+Vũ Thị Lan Anh|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Thị Xuân Tuyến|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Vũ Thị Hà|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Đinh Công Khánh|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Trần Thị Thu Huyền|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Vũ Thị Minh Phương|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Hoàng Mai|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Thị Thúy Trinh|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Hoàng Thị Thu Hường|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Hải Yến|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Lê Minh Thu|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Đỗ Thị Thu Hương|Cán bộ|Phòng Vận hành nghiệp vụ thẻ
+Nguyễn Tiến Thành|Trưởng phòng|Phòng Kỹ thuật
+Lê Hoàng Nhâm|Phó phòng|Phòng Kỹ thuật
+Khổng Minh Thảo|Phó phòng|Phòng Kỹ thuật
+Nguyễn Thị Cẩm Thơ|Phó phòng|Phòng Kỹ thuật
+Dương Cường Anh|Cán bộ|Phòng Kỹ thuật
+Nguyễn Thị Hương|Cán bộ|Phòng Kỹ thuật
+Trần Thu Trang|Cán bộ|Phòng Kỹ thuật
+Nguyễn Trung Hậu|Cán bộ|Phòng Kỹ thuật
+Vũ Thái Bằng|Cán bộ|Phòng Kỹ thuật
+Lê Mạnh Cường|Cán bộ|Phòng Kỹ thuật
+Phạm Thanh Tùng|Cán bộ|Phòng Kỹ thuật
+Phạm Thanh Đông|Cán bộ|Phòng Kỹ thuật
+Trần Thị Hằng|Cán bộ|Phòng Kỹ thuật
+Vũ Vân Giang|Cán bộ|Phòng Kỹ thuật
+Luyện Văn Thao|Cán bộ|Phòng Kỹ thuật
+Vũ Hà Long|Cán bộ|Phòng Kỹ thuật
+Nguyễn Phú Lâm|Cán bộ|Phòng Kỹ thuật
+Nguyễn Quốc Việt|Cán bộ|Phòng Kỹ thuật
+Vũ Duy Đông|Cán bộ|Phòng Kỹ thuật
+Hà Công Trung|Cán bộ|Phòng Kỹ thuật
+Nguyễn Thị Diễm Hằng|Trưởng phòng|Phòng Thanh toán thẻ
+Lê Thị Mỹ|Phó phòng|Phòng Thanh toán thẻ
+Trần Thị Huyền Trâm|Phó phòng|Phòng Thanh toán thẻ
+Nguyễn Hải Hà|Phó phòng|Phòng Thanh toán thẻ
+Vũ Thị Khánh Hưng|Cán bộ|Phòng Thanh toán thẻ
+Nguyễn Thị Tuyết|Cán bộ|Phòng Thanh toán thẻ
+Lã Thị Hương Giang|Cán bộ|Phòng Thanh toán thẻ
+Phạm Thị Quyên|Cán bộ|Phòng Thanh toán thẻ
+Nguyễn Thị Chinh Lương|Cán bộ|Phòng Thanh toán thẻ
+Bùi Thị Hương Lan|Cán bộ|Phòng Thanh toán thẻ
+Hoàng Thị Hằng|Cán bộ|Phòng Thanh toán thẻ
+Ngô Thị Hồng Vân|Cán bộ|Phòng Thanh toán thẻ
+Đặng Ngọc Trâm|Cán bộ|Phòng Thanh toán thẻ
+Nguyễn Thị Thanh Huyền|Cán bộ|Phòng Thanh toán thẻ
+Trương Thị Ngọc Tú|Cán bộ|Phòng Thanh toán thẻ
+Nguyễn Thượng Hiền|Cán bộ|Phòng Thanh toán thẻ
+Phạm Mạnh Quý|Cán bộ|Phòng Thanh toán thẻ
+Phạm Thị Hương Thảo|Cán bộ|Phòng Thanh toán thẻ
+Nguyễn Mạnh Hùng|Trưởng phòng|Phòng Kiểm tra, kiểm soát nội bộ
+Điêu Văn Đông|Phó phòng|Phòng Kiểm tra, kiểm soát nội bộ
+Nguyễn Hùng Cường|Phó phòng|Phòng Kiểm tra, kiểm soát nội bộ
+Đặng Văn Nghĩa|Phó phòng|Phòng Kiểm tra, kiểm soát nội bộ
+Lại Thị Xuân|Cán bộ|Phòng Kiểm tra, kiểm soát nội bộ
+Phạm Đình Hải|Cán bộ|Phòng Kiểm tra, kiểm soát nội bộ
+Nguyễn Tuấn Quang|Cán bộ|Phòng Kiểm tra, kiểm soát nội bộ
+Vũ Thị Nguyệt|Cán bộ|Phòng Kiểm tra, kiểm soát nội bộ

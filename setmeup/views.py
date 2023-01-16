@@ -258,6 +258,7 @@ class LichBaoCaoUpdate(UpdateView):
     form_class = LichBaoCaoForm
 
     def form_valid(self, form):
+        print(form)
         messages.success(self.request, f"Sửa lịch báo cáo thành công")
         return super().form_valid(form)
 
@@ -292,5 +293,4 @@ class NoTif(ListView):
                 timezone.now() + datetime.timedelta(days=30)
             )
         )
-        print(qs.query)
         return qs

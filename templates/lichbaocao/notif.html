@@ -24,7 +24,9 @@
                             {% else %}
                             <b>Trong {{ nof.get_delta_days }} ngày tới </b>
                             {% endif %}
+                        {% if nof.noidung %}
                             <p>{{ nof.noidung }}</p>
+                        {% endif %}
                         </div>
                     {% endfor %}
             </div>
