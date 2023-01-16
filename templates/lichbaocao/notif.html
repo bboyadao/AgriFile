@@ -19,7 +19,11 @@
                         <div class="callout {{ nof.get_class_by_time }}">
                             <h5>{{ nof.name }}</h5>
                             <b>{{ nof.duedate }}</b> <br>
+                            {% if nof.get_delta_days == 0 or nof.get_delta_days == -1 %}
+                                <b>Trong hôm nay </b>
+                            {% else %}
                             <b>Trong {{ nof.get_delta_days }} ngày tới </b>
+                            {% endif %}
                             <p>{{ nof.noidung }}</p>
                         </div>
                     {% endfor %}

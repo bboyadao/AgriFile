@@ -24,6 +24,7 @@ class NoiNhan(models.Model):
 class LichBaoCao(models.Model):
     name = models.CharField(max_length=255)
     duedate = models.DateTimeField(null=True)
+    noidung = models.TextField(null=True)
 
     class Meta:
         ordering = ["-pk"]

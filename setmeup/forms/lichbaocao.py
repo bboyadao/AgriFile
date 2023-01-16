@@ -36,7 +36,7 @@ class LichBaoCaoForm(ModelForm):
 
 	class Meta:
 		model = LichBaoCao
-		fields = ["name", "duedate"]
+		fields = ["name", "duedate", "noidung"]
 		widgets = {
 			'name': forms.TextInput(),
 		}
@@ -44,4 +44,5 @@ class LichBaoCaoForm(ModelForm):
 		labels = {
 			'name': "Tên",
 			"duedate": "Hạn nộp",
+			"noidung": "Nội dung"
 		}

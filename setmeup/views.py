@@ -288,7 +288,7 @@ class NoTif(ListView):
     def get_queryset(self):
         qs = super().get_queryset().filter(
             duedate__range=(
-                timezone.now(),
+                timezone.now().date(),
                 timezone.now() + datetime.timedelta(days=30)
             )
         )

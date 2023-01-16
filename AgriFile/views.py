@@ -157,7 +157,7 @@ def global_templates_context_processors(request):
 
 	num_of_nof = LichBaoCao.objects.filter(
 		duedate__range=(
-			timezone.now(),
+			timezone.now().date(),
 			timezone.now() + datetime.timedelta(days=7)
 		)
 	).count()
