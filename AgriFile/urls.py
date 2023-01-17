@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from AgriFile.views import Login, ChangePass, PasswordChangeDoneView, Logout
 from django.views.i18n import JavaScriptCatalog
 
-from setmeup.views import AdminBaoCao, NoTif
+from setmeup.views import AdminBaoCao, NoTif, ThongKe
 
 
 @login_required
@@ -38,6 +38,9 @@ urlpatterns = [
 
 	# Admin Bao Cao
 	path('admin/baocao/', AdminBaoCao.as_view(), name="admin_baocao_list"),
+	path('admin/thongke/', ThongKe.as_view(), name="thongke"),
+
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

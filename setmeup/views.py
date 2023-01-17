@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
 from baocao.models import BaoCao
@@ -280,6 +280,10 @@ class AdminBaoCao(LoginRequiredMixin, FilterView):
     filterset_class = BaoCaoFilterset
     paginate_by = 5
     filter = None
+
+
+class ThongKe(TemplateView):
+    template_name = "thongke/blank.html"
 
 
 class NoTif(ListView):
