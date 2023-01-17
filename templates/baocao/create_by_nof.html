@@ -6,8 +6,16 @@
 {% block page_actions %}
     Tạo Báo Cáo
 {% endblock %}
+
 {% block content %}
-    <div class="card card-{{ nof.get_class_hell }} card-outline">
+    <div class="card
+{% if nof %}
+        card-{{ nof.get_class_hell }}
+    {% else %}
+        card-primary
+{% endif %}
+
+      card-outline">
     <form class="form-horizontal"  method="post" action="{% url 'baocao_create' %}?nof={{ nof.pk }}"> {% csrf_token %}
     <div class="card-body">
         {{ form | crispy }}
@@ -19,7 +27,14 @@
                 </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-block bg-gradient-primary float-right" onclick="rmDis()">Tạo</button>
+      <button type="submit" class="btn btn-block
+      {% if nof %}
+        bg-gradient-{{ nof.get_class_hell }}
+    {% else %}
+        bg-gradient-primary
+{% endif %}
+      {{ nof.get_class_hell }}
+      float-right" onclick="rmDis()">Tạo</button>
     </div>
     <!-- /.card-footer -->
   </form>

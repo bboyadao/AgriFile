@@ -32,9 +32,11 @@ class BaoCaoCreateByNof(LoginRequiredMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        nof = self.get_form_kwargs()
-        if self.request.method == "get":
-            context["nof"] = nof["nof"]
+        kag = self.get_form_kwargs()
+        nof = kag.get("nof", None)
+        if nof and self.request.method == "GET":
+            context["nof"] = kag["nof"]
+        print(context)
         return context
 
     def get_success_url(self):
