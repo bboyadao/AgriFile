@@ -145,6 +145,7 @@ for i in a:
 User.objects.bulk_create(aa)
 
 User.objects.create_superuser(
+	full_name="a van min",
 	username="admin",
 	email="admin@gmail.com",
 	password="admin123",

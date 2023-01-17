@@ -58,6 +58,11 @@ class Logout(LogoutView):
 class Login(LoginView):
 	template_name = "user/login.html"
 
+	def get(self, request, *args, **kwargs):
+		if request.user.is_authenticated:
+			return HttpResponseRedirect(reverse("index"))
+		return super().get(request, *args, **kwargs)
+
 
 class Zone(object):
 	def __init__(self, name, child):
@@ -120,7 +125,7 @@ data = [
 				"icon": "fa fa-clipboard",
 				"navs": [
 					{"name": "Danh Sách Đã Nộp", "icon": "fa fa-list-ol", "link": "baocao_list"},
-					{"name": "Tạo Mới", "icon": "fa fa-plus", "link": "baocao_quick_create"},
+					{"name": "Tạo Mới", "icon": "fa fa-plus", "link": "baocao_create"},
 
 				]
 			},

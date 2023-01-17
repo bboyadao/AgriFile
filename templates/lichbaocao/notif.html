@@ -30,7 +30,7 @@
                         {% if nof.noidung %}
                             <pre>{{ nof.noidung }}</pre>
                         {% endif %}
-                        <a href="{% url 'baocao_create_by_nof' %}?nof={{ nof.pk }}">Click để tạo.</a>
+                        <a href="{% url 'baocao_create' %}?nof={{ nof.pk }}">Click để tạo.</a>
                         </div>
                     {% endfor %}
             </div>

@@ -1,17 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views import View
 from django.views.generic import FormView, DetailView, ListView, DeleteView, UpdateView
-from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import BaseUpdateView
 
-from baocao.forms import BaoCaoForm, BaoCaoQuickForm
+from baocao.forms import BaoCaoForm
 from baocao.models import MediaFile, BaoCao
 from setmeup.models import LichBaoCao
-
-
 # from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
@@ -40,42 +36,6 @@ class BaoCaoCreateByNof(LoginRequiredMixin, FormView):
         if self.request.method == "get":
             context["nof"] = nof["nof"]
         return context
-
-    def get_success_url(self):
-        return reverse('baocao_detail', kwargs={'pk': self.pk})
-
-    def form_valid(self, form):
-        item = form.save()
-        self.pk = item.pk
-        messages.success(self.request, f"Tạo báo cáo thành công.")
-        return super().form_valid(form)
-
-    def post(self, request, *args, **kwargs):
-
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        files = request.FILES.getlist('file_field')
-        if form.is_valid():
-            baocao = form.save(commit=False)
-            baocao.created_by = request.user
-            baocao.save()
-            a = []
-            for f in files:
-                a.append(MediaFile(baocao=baocao,
-                                   media=f,
-                                   filename=f._name,
-                                   filetype=f.content_type))
-            MediaFile.objects.bulk_create(a)
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-
-class BaoCaoQuickCreate(LoginRequiredMixin, FormView):
-
-    form_class = BaoCaoQuickForm
-    template_name = 'baocao/quick_create.html'
-    pk = None
 
     def get_success_url(self):
         return reverse('baocao_detail', kwargs={'pk': self.pk})

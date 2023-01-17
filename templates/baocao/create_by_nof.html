@@ -4,47 +4,11 @@
 
 
 {% block page_actions %}
-    Tạo Báo Cáo qua thông báo.
+    Tạo Báo Cáo
 {% endblock %}
 {% block content %}
     <div class="card card-{{ nof.get_class_hell }} card-outline">
-    {% comment %}
-        <form enctype="multipart/form-data" class="form-horizontal" method="post" action="."> {% csrf_token %}
-            <div class="card-body">
-                {% for field in form %}
-                    <div class="form-group row">
-                        <label for="{{ field.id_for_label }}"
-                               class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
-                        <div class="col-sm-10">
-                            {{ field }}
-                            {{ field.errors }}
-                            {% if field.help_text %}
-                                <p class="help">{{ field.help_text|safe }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% if field.name == "file_field" %}
-                    {% endif %}
-                {% endfor %}
-                <div class="form-group row" id="files-area">
-                    <span id="filesList">
-                    <span id="files-names"></span>
-                    </span>
-                </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <button type="submit" class="btn btn-block bg-{{ nof.get_class_hell }} float-right">Tạo</button>
-            </div>
-
-            <!-- /.card-footer -->
-
-        </form>
-        {% endcomment %}
-
-
-
-    <form class="form-horizontal"  method="post" action="{% url 'baocao_create_by_nof' %}?nof={{ nof.pk }}"> {% csrf_token %}
+    <form class="form-horizontal"  method="post" action="{% url 'baocao_create' %}?nof={{ nof.pk }}"> {% csrf_token %}
     <div class="card-body">
         {{ form | crispy }}
     </div>
@@ -55,13 +19,18 @@
                 </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <button type="submit" class="btn btn-block bg-gradient-primary float-right">Tạo</button>
+      <button type="submit" class="btn btn-block bg-gradient-primary float-right" onclick="rmDis()">Tạo</button>
     </div>
     <!-- /.card-footer -->
   </form>
 
 
+<script>
+function rmDis() {
+        document.getElementById("id_nof").disabled = false;
+}
 
+</script>
     </div>
     <style>
         #files-area {
