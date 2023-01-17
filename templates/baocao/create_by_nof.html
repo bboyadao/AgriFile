@@ -16,7 +16,7 @@
 {% endif %}
 
       card-outline">
-    <form class="form-horizontal"  method="post" action="{% url 'baocao_create' %}?nof={{ nof.pk }}"> {% csrf_token %}
+    <form class="form-horizontal" enctype="multipart/form-data"  method="post" action="{% url 'baocao_create' %}?nof={{ nof.pk }}"> {% csrf_token %}
     <div class="card-body">
         {{ form | crispy }}
     </div>

@@ -30,11 +30,11 @@ mi:
 cac:
 	python manage.py createcachetable
 
-mock:
-	echo "from django.contrib.auth import get_user_model;from set; from setmeup.models import LichBaoCao, NoiNhan, PhongBan, Title; User = get_user_model(); User.objects.create_superuser(username='admin', password='admin123', phongban=PhongBan.objects.last(), title=Title.objects.last())" | python manage.py shell
-
 #mock:
-#	python manage.py mock_alias
+#	echo "from django.contrib.auth import get_user_model;from set; from setmeup.models import LichBaoCao, NoiNhan, PhongBan, Title; User = get_user_model(); User.objects.create_superuser(username='admin', password='admin123', phongban=PhongBan.objects.last(), title=Title.objects.last())" | python manage.py shell
+
+mock:
+	python manage.py mock
 #	python manage.py shell < user/mocks.py
 #	python manage.py shell < heo/mocks.py
 

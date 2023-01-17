@@ -12,7 +12,6 @@ class CustomSelect(forms.widgets.Select):
 	def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
 		option = super(CustomSelect, self).create_option(name, value, label, selected, index, subindex, attrs)
 		for pk, la, class_hell, in self.modify_choices:
-			print(pk, la, class_hell)
 			if value == pk:
 				option['attrs']['class'] = f"bg-{class_hell}"
 				option['attrs']['label'] = f"(#{pk})---{la}"
@@ -20,6 +19,24 @@ class CustomSelect(forms.widgets.Select):
 
 
 class BaoCaoForm(forms.ModelForm):
+
+	file_field = forms.FileField(
+		required=False, label="File đính kèm",
+		widget=forms.ClearableFileInput(
+			attrs={
+				'multiple': True,
+			}),
+	)
+	thoigian = forms.DateTimeField(
+		label="Thời gian",
+		input_formats=['%d/%m/%Y %H:%M'],
+		widget=forms.TextInput(
+			attrs={
+				'class': 'datetimepicker',
+				"autocomplete": "off"
+			}
+		))
+
 	def __init__(self, *args, **kwargs):
 		nof_instance = kwargs.pop('nof', None)
 		if nof_instance:
@@ -48,23 +65,6 @@ class BaoCaoForm(forms.ModelForm):
 			if field_name in icons:
 				field.icon = icons[field_name]
 
-	file_field = forms.FileField(
-		required=False, label="File đính kèm",
-		widget=forms.ClearableFileInput(
-			attrs={
-				'multiple': True,
-			}),
-	)
-	thoigian = forms.DateTimeField(
-		label="Thời gian",
-		input_formats=['%d/%m/%Y %H:%M'],
-		widget=forms.TextInput(
-			attrs={
-				'class': 'datetimepicker',
-				"autocomplete": "off"
-			}
-		))
-
 	class Meta:
 		model = BaoCao
 		fields = [
@@ -81,6 +81,7 @@ class BaoCaoForm(forms.ModelForm):
 		]
 
 		labels = {
+			"name": "Tên",
 			'nof': "Lịch báo cáo",
 			'file_field': "File đính kèm",
 			"noidung": "Nội dung",

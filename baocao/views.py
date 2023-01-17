@@ -8,6 +8,8 @@ from django.views.generic.edit import BaseUpdateView
 from baocao.forms import BaoCaoForm
 from baocao.models import MediaFile, BaoCao
 from setmeup.models import LichBaoCao
+
+
 # from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
@@ -17,7 +19,6 @@ class BaoCaoDetail(LoginRequiredMixin, DetailView):
 
 
 class BaoCaoCreateByNof(LoginRequiredMixin, FormView):
-
     form_class = BaoCaoForm
     template_name = 'baocao/create_by_nof.html'
     pk = None
@@ -36,7 +37,6 @@ class BaoCaoCreateByNof(LoginRequiredMixin, FormView):
         nof = kag.get("nof", None)
         if nof and self.request.method == "GET":
             context["nof"] = kag["nof"]
-        print(context)
         return context
 
     def get_success_url(self):

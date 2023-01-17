@@ -126,13 +126,13 @@
                             <b class="d-block">{{ object.nguoi_ky.full_name }}</b>
                         </p>
                     </div>
-                    <h5 class="mt-5 text-muted">File đính kèm: {{ object.mediafile_set.count }}</h5>
+                    <h5 class="mt-5 text-muted">File đính kèm: {{ object.mediafile_set.count }} </h5>
                     <ul class="list-unstyled">
                         {% for file in object.mediafile_set.all %}
                             <li>
                                 <a href="{{ file.media.url }}" target="_blank" class="btn-link text-secondary">
                                     <i class="far fa-fw fa-file-word"></i>
-                                    {{ file.filename }}
+                                    {{ file.filename }} (<a href="{{ file.media.url }}" target="_blank">Download</a>)
                                 </a>
                             </li>
                         {% endfor %}

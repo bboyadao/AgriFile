@@ -7,6 +7,7 @@
 {% endblock %}
 {% block content %}
     <div class="card card-primary card-outline">
+
         <form enctype="multipart/form-data" class="form-horizontal" method="post" action="."> {% csrf_token %}
             <div class="card-body">
                 {% for field in form %}
@@ -26,9 +27,19 @@
 
                         </div>
                     </div>
-                    {% if field.name == "file_field" %}
-                    {% endif %}
+
                 {% endfor %}
+            {% comment %}
+            {% if object.mediafile_set.count > 0 %}
+                <div class="form-group row" id="files-area">
+                    <span id="filesList">
+                        {% for i in object.mediafile_set.all %}
+                            <span id="files-names">{{ i }}</span>
+                        {% endfor %}
+                    </span>
+                </div>
+            {% endif %}
+            {% endcomment %}
             <div class="form-group row" id="files-area">
                     <span id="filesList">
                     <span id="files-names"></span>
@@ -39,9 +50,7 @@
             <div class="card-footer">
                 <button type="submit" class="btn btn-block bg-gradient-info float-right">Sửa</button>
             </div>
-
             <!-- /.card-footer -->
-
         </form>
     </div>
     <style>
