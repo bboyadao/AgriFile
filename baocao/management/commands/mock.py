@@ -142,7 +142,6 @@ class Command(BaseCommand):
             p, _ = PhongBan.objects.get_or_create(name=i[2])
             alphabet = string.ascii_letters + string.digits
             username = ''.join(secrets.choice(alphabet) for i in range(20))
-            trim_me = "MacDinh-"
             u = User()
             u.full_name = i[0]
             u.title = t
