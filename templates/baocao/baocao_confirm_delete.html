@@ -1,0 +1,12 @@
+{% extends 'adminlte/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <p>Xác nhận xóa BÁO CÁO: <b>"{{ object.name }}"</b>? </p>
+    {{ form }}
+    <input type="submit" value="Xác nhận" class="btn btn-danger">
+</form>
+
+{% endblock %}
+

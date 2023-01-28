@@ -259,7 +259,6 @@ class LichBaoCaoUpdate(LoginRequiredMixin, UpdateView):
     form_class = LichBaoCaoForm
 
     def form_valid(self, form):
-        print(form)
         messages.success(self.request, f"Sửa lịch báo cáo thành công")
         return super().form_valid(form)
 

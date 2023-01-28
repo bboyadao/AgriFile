@@ -1,15 +1,22 @@
 import os
+from datetime import datetime
 
 from django.db import models
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
+
+
+class ThongKeManager(models.Manager):
+
+	def month(self, val):
+		return self
 
 
 class BaoCao(models.Model):
 	name = models.CharField(max_length=255)
 	noidung = models.TextField()
-	# lich = models.ForeignKey("setmeup.LichBaoCao", on_delete=models.CASCADE)
 	nguoi_duyet = models.ForeignKey(
 		"user.User", on_delete=models.SET_NULL, null=True, related_name="nguoi_duyet")
 	nguoi_ky = models.ForeignKey(
@@ -26,6 +33,13 @@ class BaoCao(models.Model):
 		"user.User", on_delete=models.PROTECT)
 
 	nof = models.ForeignKey("setmeup.LichBaoCao", on_delete=models.SET_NULL, null=True)
+	created_at = models.DateTimeField(auto_now=True)
+	thongke = ThongKeManager()
+
+	class ThongkeKind(models.IntegerChoices):
+		thang = 1, "Tháng"
+		quy = 2, "Quý"
+		nam = 3, "Năm"
 
 	class Meta:
 		ordering = ["-pk"]
@@ -47,9 +61,3 @@ class MediaFile(models.Model):
 	media = models.FileField(upload_to=media_directory_path)
 	filename = models.CharField(max_length=255, null=True)
 	filetype = models.CharField(max_length=255, null=True)
-
-
-# @receiver(post_save, sender=BaoCao, dispatch_uid="update_to_report")
-# def update_stock(sender, instance, **kwargs):
-#     instance.product.stock -= instance.amount
-#     instance.product.save()
