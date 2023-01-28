@@ -98,15 +98,7 @@ data = [
 
 				]
 			},
-			{
-				"name": "Cài đặt",
-				"icon": "fa fa-cogs",
-				"navs": [
-					{"name": "Phòng ban", "icon": "fa fa-building", "link": "phongban_list"},
-					{"name": "Nơi nhận", "icon": "fa fa-paper-plane", "link": "noinhan_list"},
-					{"name": "Lịch báo cáo", "icon": "fa fa-calendar", "link": "lichbaocao_list"},
-				],
-			},
+
 			{
 				"name": "Quản lý Báo Cáo",
 				"icon": "fa fa-hashtag",
@@ -129,6 +121,15 @@ data = [
 	{
 		"name": "USER",
 		"menu": [
+{
+				"name": "Cài đặt",
+				"icon": "fa fa-cogs",
+				"navs": [
+					{"name": "Phòng ban", "icon": "fa fa-building", "link": "phongban_list"},
+					{"name": "Nơi nhận", "icon": "fa fa-paper-plane", "link": "noinhan_list"},
+					{"name": "Lịch báo cáo", "icon": "fa fa-calendar", "link": "lichbaocao_list"},
+				],
+			},
 			{
 				"name": "Báo cáo",
 				"icon": "fa fa-clipboard",
