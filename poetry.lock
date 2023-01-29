@@ -53,6 +53,17 @@ python-versions = ">=3.6"
 django = "*"
 
 [[package]]
+name = "django-appconf"
+version = "1.0.5"
+description = "A helper class for handling configuration defaults of packaged apps gracefully."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
 name = "django-crispy-forms"
 version = "1.14.0"
 description = "Best way to have Django DRY forms"
@@ -81,6 +92,23 @@ python-versions = ">=3.7"
 
 [package.dependencies]
 Django = ">=3.2"
+
+[[package]]
+name = "django-select2"
+version = "8.0.0"
+description = "This is a Django_ integration of Select2_."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+django = ">=3.2"
+django-appconf = ">=0.6.0"
+
+[package.extras]
+docs = ["sphinx"]
+selenium = ["selenium"]
+test = ["pytest", "pytest-cov", "pytest-django", "selenium"]
 
 [[package]]
 name = "gunicorn"
@@ -142,7 +170,7 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "67e050ec215ff132bf9bfadbc1ca8500d9ccffc5bc1a8983c995955006af031d"
+content-hash = "221863e665b4724db25e5ee6e62cde7876db42c917988e8300d32c27d73d7cba"
 
 [metadata.files]
 asgiref = [
@@ -161,6 +189,10 @@ django-adminlte-3 = [
     {file = "django-adminlte-3-0.1.6.tar.gz", hash = "sha256:e81ac781da5111eced73ce30f04f95d5f2d0cf19ee226b1e1f92e2646a894aa0"},
     {file = "django_adminlte_3-0.1.6-py3-none-any.whl", hash = "sha256:a8f81b2b01bf1ac498c19a86ef40ea05517f90944d961bdf57d00eec739c4c2c"},
 ]
+django-appconf = [
+    {file = "django-appconf-1.0.5.tar.gz", hash = "sha256:be3db0be6c81fa84742000b89a81c016d70ae66a7ccb620cdef592b1f1a6aaa4"},
+    {file = "django_appconf-1.0.5-py3-none-any.whl", hash = "sha256:ae9f864ee1958c815a965ed63b3fba4874eec13de10236ba063a788f9a17389d"},
+]
 django-crispy-forms = [
     {file = "django-crispy-forms-1.14.0.tar.gz", hash = "sha256:35887b8851a931374dd697207a8f56c57a9c5cb9dbf0b9fa54314da5666cea5b"},
     {file = "django_crispy_forms-1.14.0-py3-none-any.whl", hash = "sha256:bc4d2037f6de602d39c0bc452ac3029d1f5d65e88458872cc4dbc01c3a400604"},
@@ -172,6 +204,10 @@ django-extensions = [
 django-filter = [
     {file = "django-filter-22.1.tar.gz", hash = "sha256:ed473b76e84f7e83b2511bb2050c3efb36d135207d0128dfe3ae4b36e3594ba5"},
     {file = "django_filter-22.1-py3-none-any.whl", hash = "sha256:ed429e34760127e3520a67f415bec4c905d4649fbe45d0d6da37e6ff5e0287eb"},
+]
+django-select2 = [
+    {file = "django-select2-8.0.0.tar.gz", hash = "sha256:0145c9cb34a8c0813f68d7165ed6b034ac03fbdbf145aea203d15ae1653cf7d9"},
+    {file = "django_select2-8.0.0-py3-none-any.whl", hash = "sha256:38e2c91c99f0da07bb43addfa1ac3a2cd6a209154a93edbf4564b9203fa32a4d"},
 ]
 gunicorn = [
     {file = "gunicorn-20.1.0-py3-none-any.whl", hash = "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e"},

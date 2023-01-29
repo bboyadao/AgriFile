@@ -3,7 +3,6 @@ from crispy_forms.layout import Submit, Layout, Field
 from django import forms
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.forms import ModelForm, NumberInput
-
 from user.models import User
 
 
@@ -46,11 +45,9 @@ class UserForm(ModelForm):
 class UserUpdateForm(ModelForm):
 	username = forms.NumberInput()
 
-
-
 	class Meta:
 		model = User
-		fields = ["username", "full_name","title", "phongban"]
+		fields = ["username", "full_name", "title", "phongban"]
 		error_messages = {
 			NON_FIELD_ERRORS: {
 				'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
@@ -62,12 +59,14 @@ class UserUpdateForm(ModelForm):
 		}
 		labels = {
 			'username': "Số điện thoại",
-			"full_name": "Tên",
-			"phongban": "Phòng ban"
+			"full_name": "Tên đầy đủ",
+			"phongban": "Phòng ban",
+			"title": "Chức danh"
 		}
 		help_texts = {
 			'username': 'Sđt (09xxx)',
 		}
+
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.helper = FormHelper()

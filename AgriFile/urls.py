@@ -40,6 +40,7 @@ urlpatterns = [
 	path('admin/baocao/', AdminBaoCao.as_view(), name="admin_baocao_list"),
 	path('admin/thongke/', ThongKe.as_view(), name="thongke"),
 
+	path("select2/", include("django_select2.urls")),
 
 
 ]

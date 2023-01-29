@@ -3,6 +3,12 @@
 {% block page_actions %}
     Tạo User
 {% endblock %}
+{% comment %}
+{% block style_sheets %}
+{{ form.media.css }}
+{% endblock %}
+{% endcomment %}
+
 {% block content %}
 <div class="card card-primary card-outline">
   <form class="form-horizontal"  method="post" action="."> {% csrf_token %}
@@ -15,5 +21,12 @@
     </div>
     <!-- /.card-footer -->
   </form>
+
 </div>
 {% endblock %}
+
+{% comment %}
+{% block extra_js %}
+    {{ form.media.js }}
+{% endblock %}
+{% endcomment %}

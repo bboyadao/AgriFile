@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
     'django_filters',
+    'django_select2',
     'user',
     'setmeup',
     'baocao',
@@ -79,6 +80,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, STORAGE_DIR, 'db.sqlite3'),
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
+
+SELECT2_CACHE_BACKEND = "default"
+SELECT2_BOOTSTRAP = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {

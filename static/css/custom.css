@@ -1,0 +1,9 @@
+.select2-container {
+    display: table!important;
+    table-layout: fixed!important;
+    .selection {
+        height: 100%;
+        float: left;
+        width: 100%;
+    }
+}
