@@ -1,17 +1,16 @@
 import os
-from datetime import datetime
 
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 
 
 class ThongKeManager(models.Manager):
+	pass
 
-	def month(self, val):
-		return self
+
+class BaoCaoManager(models.Manager):
+	pass
 
 
 class BaoCao(models.Model):
@@ -35,6 +34,7 @@ class BaoCao(models.Model):
 	nof = models.ForeignKey("setmeup.LichBaoCao", on_delete=models.SET_NULL, null=True)
 	created_at = models.DateTimeField(auto_now=True)
 	thongke = ThongKeManager()
+	objects = BaoCaoManager()
 
 	class ThongkeKind(models.IntegerChoices):
 		thang = 1, "Tháng"
