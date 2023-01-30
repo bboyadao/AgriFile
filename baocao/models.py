@@ -1,6 +1,8 @@
 import os
 
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 
@@ -36,11 +38,6 @@ class BaoCao(models.Model):
 	thongke = ThongKeManager()
 	objects = BaoCaoManager()
 
-	class ThongkeKind(models.IntegerChoices):
-		thang = 1, "Tháng"
-		quy = 2, "Quý"
-		nam = 3, "Năm"
-
 	class Meta:
 		ordering = ["-pk"]
 
@@ -61,3 +58,46 @@ class MediaFile(models.Model):
 	media = models.FileField(upload_to=media_directory_path)
 	filename = models.CharField(max_length=255, null=True)
 	filetype = models.CharField(max_length=255, null=True)
+
+
+class ThongKe(models.Model):
+	class ThongkeKind(models.IntegerChoices):
+		thang = 1, "Tháng"
+		quy = 2, "Quý"
+		nam = 3, "Năm"
+
+	kind = models.SmallIntegerField(choices=ThongkeKind.choices)
+	val = models.SmallIntegerField()
+	year = models.SmallIntegerField()
+	baocao = models.ManyToManyField("baocao.BaoCao")
+
+	def __str__(self):
+		return f"{self.get_kind_display()} {self.val} {self.year}"
+
+	@staticmethod
+	def get_quarter(dt):
+		return (dt.month - 1) // 3 + 1
+
+	@staticmethod
+	def my_val_by_kind(kind, dt):
+		match kind:
+			case ThongKe.ThongkeKind.thang:
+				return dt.month
+			case ThongKe.ThongkeKind.quy:
+				return ThongKe.get_quarter(dt)
+			case ThongKe.ThongkeKind.nam:
+				return dt.year
+
+	@classmethod
+	def get_or_new(cls, ins):
+		for kind in ThongKe.ThongkeKind.values:
+			val = ThongKe.my_val_by_kind(kind=kind, dt=ins.thoigian)
+			t, _ = ThongKe.objects.get_or_create(
+				kind=kind, val=val, year=ins.thoigian.year
+			)
+			t.baocao.add(ins)
+
+
+@receiver(post_save, sender=BaoCao, dispatch_uid="update_to_report")
+def update_thongke(sender, instance, **kwargs):  # noqa
+	ThongKe.get_or_new(instance)

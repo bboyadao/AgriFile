@@ -19,6 +19,7 @@ from django_filters.views import FilterView
 from baocao.models import BaoCao
 from setmeup.filter import BaoCaoFilterset
 from setmeup.forms.lichbaocao import LichBaoCaoForm
+from setmeup.forms.thongke import ThongkeForm
 from setmeup.models import NoiNhan, PhongBan, LichBaoCao
 from user.forms import UserUpdateForm, UserForm
 from user.models import User
@@ -281,8 +282,10 @@ class AdminBaoCao(LoginRequiredMixin, FilterView):
     filter = None
 
 
-class ThongKe(TemplateView):
-    template_name = "thongke/blank.html"
+class ThongKe(FormView):
+    template_name = "thongke/show.html"
+    form_class = ThongkeForm
+    success_url = '/thanks/'
 
 
 class NoTif(ListView):
