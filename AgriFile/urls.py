@@ -3,12 +3,11 @@ from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import path, include
-from django.utils.decorators import method_decorator
 
 from AgriFile.views import Login, ChangePass, PasswordChangeDoneView, Logout
 from django.views.i18n import JavaScriptCatalog
 
-from setmeup.views import AdminBaoCao, NoTif, ThongKe
+from setmeup.views import AdminBaoCao, NoTif, ThongKeView, ThongKeDetailView
 
 
 @login_required
@@ -38,10 +37,8 @@ urlpatterns = [
 
 	# Admin Bao Cao
 	path('admin/baocao/', AdminBaoCao.as_view(), name="admin_baocao_list"),
-	path('admin/thongke/', ThongKe.as_view(), name="thongke"),
-
+	path('admin/thongke/', ThongKeView.as_view(), name="thongke"),
+	path('admin/thongke/<pk>/', ThongKeDetailView.as_view(), name="thongke_detail"),
 	path("select2/", include("django_select2.urls")),
-
-
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -72,7 +72,7 @@ class ThongKe(models.Model):
 	baocao = models.ManyToManyField("baocao.BaoCao")
 
 	def __str__(self):
-		return f"{self.get_kind_display()} {self.val} {self.year}"
+		return f"{self.get_kind_display()} {self.val} {self.year if self.kind != ThongKe.ThongkeKind.nam else ''}"
 
 	@staticmethod
 	def get_quarter(dt):

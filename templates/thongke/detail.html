@@ -1,0 +1,13 @@
+{% extends 'adminlte/base.html' %}
+{% load crispy_forms_filters %}
+{% load static i18n crispy_forms_tags %}
+{% block page_actions %}
+{{ thongke }}
+{% endblock %}
+{% block content %}
+    {% for baocao in thongke.baocao.all %}
+
+        <li>{{ baocao }}</li>
+    {% endfor %}
+
+{% endblock %}

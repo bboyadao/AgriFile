@@ -16,7 +16,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
-from baocao.models import BaoCao
+from baocao.models import BaoCao, ThongKe
 from setmeup.filter import BaoCaoFilterset
 from setmeup.forms.lichbaocao import LichBaoCaoForm
 from setmeup.forms.thongke import ThongkeForm
@@ -282,10 +282,14 @@ class AdminBaoCao(LoginRequiredMixin, FilterView):
     filter = None
 
 
-class ThongKe(FormView):
-    template_name = "thongke/show.html"
-    form_class = ThongkeForm
-    success_url = '/thanks/'
+class ThongKeView(ListView):
+    model = ThongKe
+    template_name = "thongke/list.html"
+
+
+class ThongKeDetailView(DetailView):
+    model = ThongKe
+    template_name = "thongke/detail.html"
 
 
 class NoTif(ListView):

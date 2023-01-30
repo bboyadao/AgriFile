@@ -1,7 +1,7 @@
 from django import forms
 from django_select2.forms import HeavySelect2Mixin, Select2Widget, ModelSelect2Widget
 
-from baocao.models import BaoCao
+from baocao.models import BaoCao, ThongKe
 
 
 def get_thang():
@@ -26,19 +26,18 @@ def get_nam():
 
 
 class ThongkeForm(forms.ModelForm):
-
-    class Meta:
-        model = BaoCao
-        fields = '__all__'
-        widgets = {
-            'country': ModelSelect2Widget(
-                model=BaoCao,
-                search_fields=['name__icontains'],
-            ),
-            'city': ModelSelect2Widget(
-                model=BaoCao,
-                search_fields=['name__icontains'],
-                dependent_fields={'country': 'country'},
-                max_results=500,
-            )
-        }
+	class Meta:
+		model = ThongKe
+		fields = '__all__'
+		widgets = {
+			'country': ModelSelect2Widget(
+				model=ThongKe,
+				search_fields=['name__icontains'],
+			),
+			'city': ModelSelect2Widget(
+				model=ThongKe,
+				search_fields=['name__icontains'],
+				dependent_fields={'country': 'country'},
+				max_results=500,
+			)
+		}
