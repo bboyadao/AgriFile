@@ -5,7 +5,7 @@
 {{ thongke }}
 {% endblock %}
 {% block content %}
-    {% for baocao in thongke.baocao.all %}
+    {% for baocao in baocao_list %}
 
         <li>{{ baocao }}</li>
     {% endfor %}

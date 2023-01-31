@@ -6,9 +6,52 @@ Thống kê
 
 {% endblock %}
 {% block content %}
+ {% comment %}
     {% for thongke in thongke_list %}
-
-        <li>{{ thongke }}</li>
+            <li>
+                <a href="{% url 'thongke_detail' thongke.pk %}">
+                    {% if thongke.kind == thongke.ThongkeKind.nam %}
+                    {{ thongke }}
+                    {% elif thongke.kind == thongke.ThongkeKind.quy %}
+                    &nbsp&nbsp&nbsp&nbsp{{ thongke }}
+                    {% elif thongke.kind == thongke.ThongkeKind.thang %}
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ thongke }}
+                    {% endif %}
+            ({{ thongke.total }}--- {{ thongke.quy }})</a>
+            </li>
     {% endfor %}
+     {% endcomment %}
+
+    {% load mptt_tags %}
+<ul>
+    {% recursetree thongke_list %}
+        <li>
+            <a href="{% url 'thongke_detail' node.pk %}">
+                {{ node.name }} ({{ node.count }})
+            </a>
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+
+    {% comment %}
+
+{% regroup thongke_list|dictsort:"year" by year as country_list %}
+
+<ul>
+{% for country, local_cities in country_list %}
+    <li>{{ country }}
+    <ul>
+        {% for city in local_cities %}
+          <li>{{ city.year }}: {{ city.population }}</li>
+        {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>    {% endcomment %}
 
 {% endblock %}

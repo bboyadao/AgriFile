@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class ThongKeManager(models.Manager):
@@ -60,19 +61,26 @@ class MediaFile(models.Model):
 	filetype = models.CharField(max_length=255, null=True)
 
 
-class ThongKe(models.Model):
+class ThongKe(MPTTModel):
 	class ThongkeKind(models.IntegerChoices):
 		thang = 1, "Tháng"
 		quy = 2, "Quý"
 		nam = 3, "Năm"
 
+	name = models.CharField(max_length=255, unique=True)
 	kind = models.SmallIntegerField(choices=ThongkeKind.choices)
 	val = models.SmallIntegerField()
-	year = models.SmallIntegerField()
+	created_at = models.DateTimeField(auto_created=True, null=True)
 	baocao = models.ManyToManyField("baocao.BaoCao")
+	nam = models.SmallIntegerField(null=True)
+	parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+	count = models.IntegerField(default=0)
+
+	class MPTTMeta:
+		order_insertion_by = ['name']
 
 	def __str__(self):
-		return f"{self.get_kind_display()} {self.val} {self.year if self.kind != ThongKe.ThongkeKind.nam else ''}"
+		return f"{self.name}"
 
 	@staticmethod
 	def get_quarter(dt):
@@ -90,14 +98,32 @@ class ThongKe(models.Model):
 
 	@classmethod
 	def get_or_new(cls, ins):
-		for kind in ThongKe.ThongkeKind.values:
-			val = ThongKe.my_val_by_kind(kind=kind, dt=ins.thoigian)
-			t, _ = ThongKe.objects.get_or_create(
-				kind=kind, val=val, year=ins.thoigian.year
-			)
-			t.baocao.add(ins)
+		parent = None
+		print(list(reversed(ThongKe.ThongkeKind.choices)))
+		for kind, _name in reversed(ThongKe.ThongkeKind.choices):
+			val = ThongKe.my_val_by_kind(dt=ins.thoigian, kind=kind)
+			name = f"{_name} {val}"
+
+			if kind != ThongKe.ThongkeKind.nam:
+				name += f" Năm {ins.thoigian.year}"
+			try:
+				t = ThongKe.objects.get(name=name, kind=kind, val=val, parent=parent, nam=ins.thoigian.year)
+			except ThongKe.DoesNotExist as e:
+				t = ThongKe.objects.create(
+					name=name,
+					kind=kind,
+					val=val,
+					parent=parent,
+					nam=ins.thoigian.year,
+				)
+
+			t.count += 1
+			t.save()
+			parent = t
+	# t.baocao.add(ins)
 
 
-@receiver(post_save, sender=BaoCao, dispatch_uid="update_to_report")
-def update_thongke(sender, instance, **kwargs):  # noqa
-	ThongKe.get_or_new(instance)
+@receiver(post_save, sender=BaoCao)
+def update_thongke(sender, instance, created, **kwargs):  # noqa
+	if created:
+		ThongKe.get_or_new(instance)

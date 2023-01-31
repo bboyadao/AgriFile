@@ -1,14 +1,15 @@
-import datetime
-import sys
-
+import calendar
+from datetime import datetime, date, timedelta
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.views import PasswordContextMixin
+from django.db.models import Count, Value, Q
+from django.db.models.functions import ExtractYear
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
@@ -19,7 +20,6 @@ from django_filters.views import FilterView
 from baocao.models import BaoCao, ThongKe
 from setmeup.filter import BaoCaoFilterset
 from setmeup.forms.lichbaocao import LichBaoCaoForm
-from setmeup.forms.thongke import ThongkeForm
 from setmeup.models import NoiNhan, PhongBan, LichBaoCao
 from user.forms import UserUpdateForm, UserForm
 from user.models import User
@@ -286,10 +286,53 @@ class ThongKeView(ListView):
     model = ThongKe
     template_name = "thongke/list.html"
 
+    def get_queryset(self):
+        qs = super().get_queryset().prefetch_related("baocao")\
+            .annotate(total=Count('baocao'))
+        return qs
+
+
+def get_start_date(quarter, year):
+    match quarter:
+        case 1:
+            return date(year=year, month=1, day=1)
+        case 2:
+            return date(year=year, month=4, day=1)
+        case 3:
+            return date(year=year, month=7, day=1)
+        case 4:
+            return date(year=year, month=10, day=1)
+
 
 class ThongKeDetailView(DetailView):
     model = ThongKe
     template_name = "thongke/detail.html"
+
+    def map_shit(self):
+        obj = self.get_object()
+        match obj.kind:
+            case ThongKe.ThongkeKind.quy:
+                year = obj.nam
+                days = 366 if calendar.isleap(year) else 365
+                start = get_start_date(obj.val, obj.nam)
+                end = start + timedelta(3 * days / 12)
+                return start, end
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj = self.get_object()
+        qs = BaoCao.objects.filter(thoigian__year=obj.nam)
+        q = Q()
+        match obj.kind:
+            case ThongKe.ThongkeKind.quy:
+                start, end = self.map_shit()
+                q = Q(thoigian__range=[start, end])
+            case ThongKe.ThongkeKind.nam:
+                q = Q(thoigian__year=obj.val)
+            case ThongKe.ThongkeKind.thang:
+                q = Q(thoigian__month=obj.val)
+        context['baocao_list'] = qs.filter(q)
+        return context
 
 
 class NoTif(ListView):
@@ -301,7 +344,7 @@ class NoTif(ListView):
         qs = super().get_queryset().filter(
             duedate__range=(
                 timezone.now().date(),
-                timezone.now() + datetime.timedelta(days=30)
+                timezone.now() + timedelta(days=30)
             )
         )
         return qs
