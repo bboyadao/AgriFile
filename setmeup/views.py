@@ -331,7 +331,11 @@ class ThongKeDetailView(DetailView):
                 q = Q(thoigian__year=obj.val)
             case ThongKe.ThongkeKind.thang:
                 q = Q(thoigian__month=obj.val)
+
         context['baocao_list'] = qs.filter(q)
+        context['phongban'] = qs.values("phongban__name").annotate(phongban_count=Count('phongban__name'))
+        context['noinhan'] = qs.values("noinhan__name").annotate(noinhan_count=Count('noinhan__name'))
+
         return context
 
 

@@ -2,12 +2,144 @@
 {% load crispy_forms_filters %}
 {% load static i18n crispy_forms_tags %}
 {% block page_actions %}
-{{ thongke }}
+    <h6>
+<a href="{{ request.META.HTTP_REFERER }}">< Back </a>
+    </h6>
 {% endblock %}
 {% block content %}
-    {% for baocao in baocao_list %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="invoice p-3 mb-3">
 
-        <li>{{ baocao }}</li>
-    {% endfor %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>
+                                <i class="fas fa-globe"></i> {{ thongke.name }}
+                                <small class="float-right">#{{ thongke.pk }}</small>
+                            </h4>
+                        </div>
+
+                    </div>
+
+                    <div class="row invoice-info">
+
+
+                        <div class="col-sm-4 invoice-col">
+                            Phòng ban:
+                            <address>
+                                {% for i in phongban %}
+                                <strong>{{ i.phongban__name }}: {{ i.phongban_count }}</strong><br>
+                                {% endfor %}
+                            </address>
+                        </div>
+                        <div class="col-sm-4 invoice-col">
+                            Nơi nhận:
+                            <address>
+                                 {% for i in noinhan %}
+                                <strong>{{ i.noinhan__name }}: {{ i.noinhan_count }}</strong><br>
+                                {% endfor %}
+                            </address>
+                        </div>
+                        <div class="col-sm-4 invoice-col">
+                            <b>Tổng số: {{ thongke.count }}</b><br>
+                            <br>
+                            {% comment %}
+                            <b>Order ID:</b> 4F3S8J<br>
+                            <b>Payment Due:</b> 2/22/2014<br>
+                            <b>Account:</b> 968-34567
+                             {% endcomment %}
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Tên</th>
+                                    <th>phòng ban</th>
+                                    <th>Nơi nhận</th>
+                                    <th>Thời gian</th>
+                                    <th>Nội dung</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for baocao in baocao_list %}
+
+                                <tr>
+                                    <td>{{ baocao.pk }}</td>
+                                    <td>{{ baocao.name }}</td>
+                                    <td>{{ baocao.phongban.name }}</td>
+                                    <td>{{ baocao.noinhan.name }}</td>
+                                    <td>{{ baocao.thoigian }}</td>
+                                    <td>{{ baocao.noidung }}</td>
+
+                                </tr>
+                                 {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+{% comment %}
+                    <div class="row">
+
+                        <div class="col-6">
+
+                        </div>
+
+                        <div class="col-6">
+                            <p class="lead">Amount Due 2/22/2014</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th style="width:50%">Subtotal:</th>
+                                        <td>$250.30</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tax (9.3%)</th>
+                                        <td>$10.34</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shipping:</th>
+                                        <td>$5.80</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total:</th>
+                                        <td>$265.24</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+{% endcomment %}
+
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <a onclick="window.print();" href="#" rel="noopener" target="_blank" class="btn btn-default"><i
+                                    class="fas fa-print"></i> Print</a>
+
+                            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-download"></i> Download excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 {% endblock %}

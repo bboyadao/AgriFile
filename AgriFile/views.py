@@ -111,7 +111,7 @@ data = [
 				"name": "Thống kê",
 				"icon": "far fa-chart-bar",
 				"navs": [
-					{"name": "Tháng", "icon": "fa fa-calendar", "link": 'thongke'},
+					{"name": "Danh sách", "icon": "fa fa-calendar", "link": 'thongke'},
 					# {"name": "Quý", "icon": "far fa-calendar-alt", "link": 'admin_baocao_list'},
 					# {"name": "Năm", "icon": "far fa-calendar", "link": 'admin_baocao_list'},
 				]
