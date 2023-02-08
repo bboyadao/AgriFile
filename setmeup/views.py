@@ -58,7 +58,7 @@ class CreateUser(LoginRequiredMixin, CreateView):
             password = ''.join(secrets.choice(alphabet) for i in range(20))
             user.set_password(password)
             user.save()
-            messages.success(self.request, f"Tạo thành công: <strong>{user.username} | {password}</strong>`")
+            messages.success(self.request, f"Tạo thành công: <strong>{user.username} | {password}</strong>")
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -228,7 +228,7 @@ class LichBaoCaoList(LoginRequiredMixin, ListView):
     template_name = "lichbaocao/list.html"
     queryset = LichBaoCao.objects.all()
     model = LichBaoCao
-    paginate_by = 10
+    paginate_by = 20
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset()

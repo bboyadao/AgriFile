@@ -4,21 +4,27 @@ from django.utils import timezone
 
 
 class Title(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True, verbose_name='Tên')
 
     def __str__(self):
         return self.name.__str__()
+
+    class Meta:
+        verbose_name = "Chức danh"
 
 
 class PhongBan(models.Model):
-    name = models.CharField(max_length=1024)
+    name = models.CharField(max_length=1024, unique=True, verbose_name='Tên')
 
     def __str__(self):
         return self.name.__str__()
 
+    class Meta:
+        verbose_name = "Phòng ban"
+
 
 class NoiNhan(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique = True, verbose_name = 'Tên')
 
     def __str__(self):
         return self.name.__str__()
@@ -26,6 +32,9 @@ class NoiNhan(models.Model):
     @property
     def get_absolute_url(self):
         return reverse('noinhan_detail', args=[self.pk.__str__()])
+
+    class Meta:
+        verbose_name = "Nơi nhận"
 
 
 class LichBaoCao(models.Model):

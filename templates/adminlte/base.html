@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="{% static 'js/jquery.min.js' %}"></script>
     {% block title_outer %}
         <title>{% block title %}AgriFile{% endblock %}</title>
     {% endblock %}
@@ -80,7 +81,9 @@
 {% include 'adminlte/lib/_scripts.html' %}
 {% endblock %}
 
-{% block extra_js %}{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
 
 {% block extra_foot %}{% endblock %}
 </body>
