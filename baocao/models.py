@@ -127,3 +127,6 @@ class ThongKe(MPTTModel):
 def update_thongke(sender, instance, created, **kwargs):  # noqa
 	if created:
 		ThongKe.get_or_new(instance)
+
+
+# a.values_list("pk", 'name','noidung', 'thoigian', 'phongban', 'nguoi_soan', 'nguoi_duyet', 'nguoi_ky', 'thoigian', 'noinhan' )
