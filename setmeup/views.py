@@ -8,10 +8,11 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.contrib.auth.views import PasswordContextMixin
 from django.db.models import Count, Value, Q
 from django.db.models.functions import ExtractYear
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, StreamingHttpResponse
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
@@ -24,6 +25,8 @@ from setmeup.models import NoiNhan, PhongBan, LichBaoCao
 from user.forms import UserUpdateForm, UserForm
 from user.models import User
 from django.views.generic.edit import FormView
+from io import BytesIO
+
 # if 'makemigrations' not in sys.argv and 'migrate' not in sys.argv:
 
 
@@ -337,6 +340,21 @@ class ThongKeDetailView(DetailView):
         context['noinhan'] = qs.values("noinhan__name").annotate(noinhan_count=Count('noinhan__name'))
 
         return context
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        download = request.GET.get("download")
+        if download == '1':
+            context = self.get_context_data()
+            qs = context['baocao_list']
+            excel_file = BaoCao.thongke.gen_file_thongke(qs)
+            excel_file.seek(0)
+            response = StreamingHttpResponse(excel_file,
+                                             content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = f'attachment; filename=Thống kê {self.object.name}.xlsx'.encode('utf-8')
+            return response
+        return self.render_to_response(context)
 
 
 class NoTif(ListView):

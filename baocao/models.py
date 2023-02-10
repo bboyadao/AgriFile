@@ -1,15 +1,41 @@
 import os
 
+import pandas as pd
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
-from django.utils import timezone
 from mptt.models import MPTTModel, TreeForeignKey
+from django.utils import timezone
+from pandas import DataFrame
+TZ = timezone.get_current_timezone().key
+from io import BytesIO
 
 
 class ThongKeManager(models.Manager):
-	pass
+	thongke_labels = [
+		"ID", "Tên báo cáo", "Nội dung", "Ngày ký", "Phòng ban", "Người soạn", "Người duyệt", "Người ký", "Ngày gửi",
+		"Phòng ban nhận"
+	]
+
+	def gen_file_thongke(self, qs):
+		qs.select_related('nguoi_soan', 'nguoi_ky', 'nguoi_duyet', 'phongban')
+		val_list = (
+			"pk", 'name', 'noidung', 'thoigian',
+			'phongban__name', 'nguoi_soan__full_name', 'nguoi_duyet__full_name',
+			'nguoi_ky__full_name', 'thoigian',
+			'noinhan__name'
+		)
+
+		df = pd.DataFrame(list(qs.values_list(*val_list)), columns=self.thongke_labels)
+		df['Ngày ký'] = df['Ngày ký'].dt.tz_convert(TZ).dt.tz_localize(None)
+		df['Ngày gửi'] = df['Ngày gửi'].dt.tz_convert(TZ).dt.tz_localize(None)
+
+		excel_file = BytesIO()
+		writer = pd.ExcelWriter(excel_file, engine='openpyxl')
+		df.to_excel(writer)
+		writer.close()
+		return excel_file
 
 
 class BaoCaoManager(models.Manager):
@@ -120,13 +146,12 @@ class ThongKe(MPTTModel):
 			t.count += 1
 			t.save()
 			parent = t
-	# t.baocao.add(ins)
+
+
+# t.baocao.add(ins)
 
 
 @receiver(post_save, sender=BaoCao)
 def update_thongke(sender, instance, created, **kwargs):  # noqa
 	if created:
 		ThongKe.get_or_new(instance)
-
-
-# a.values_list("pk", 'name','noidung', 'thoigian', 'phongban', 'nguoi_soan', 'nguoi_duyet', 'nguoi_ky', 'thoigian', 'noinhan' )
